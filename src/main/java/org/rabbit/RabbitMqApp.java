@@ -20,9 +20,11 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @SpringBootApplication
+@EnableSwagger2
 public class RabbitMqApp extends SpringBootServletInitializer {
     final static String queueName = "hello";
 
