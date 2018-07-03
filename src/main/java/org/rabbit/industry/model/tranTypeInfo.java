@@ -1,5 +1,5 @@
 package org.rabbit.industry.model;
-//传输类型表
+//传输类型表trantypeinfo
 public class tranTypeInfo {
     private String tti_id;//协议ｉｄ
     private String tti_name;//协议名称

@@ -1,5 +1,5 @@
 package org.rabbit.industry.model;
-//传感器类型表
+//传感器类型表sensortypeinfo
 public class sensorTypeInfo {
     private String sti_id;//传感器类型
     private String sti_name;//传感器名称

@@ -14,7 +14,9 @@ import java.util.List;
 public class tranTypeImp implements tranTypeDao {
     @Autowired
     private JdbcTemplate jdbc;
-
+    /**
+     * 查询所有传输类型列表
+     * */
     @Override
     public List<tranTypeInfo> findTranType() {
         List<tranTypeInfo> list = new ArrayList<>();
@@ -27,7 +29,9 @@ public class tranTypeImp implements tranTypeDao {
         return list;
     }
 
-
+    /**
+     * 添加传输类型
+     */
     @Override
     public int addTranType(tranTypeInfo t) {
         String sql = "insert into trantypeinfo(tti_id,tti_name) values(?,?)";
