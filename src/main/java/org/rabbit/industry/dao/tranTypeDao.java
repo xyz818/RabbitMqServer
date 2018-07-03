@@ -7,7 +7,6 @@ import java.util.List;
 public interface tranTypeDao {
     /**
      * @brief 查询所有的传输类型
-     * @param  void
      * @return  列表形式返回
      *
      * */
