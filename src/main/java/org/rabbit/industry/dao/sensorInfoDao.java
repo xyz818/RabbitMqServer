@@ -11,4 +11,46 @@ public interface sensorInfoDao {
      * @return 所有的传感器信息列表
      * */
     List<sensorinfo> findSensorByDevice(String id);
+
+
+    /**
+     * @brief 根据传感器id号查询对应的传感器信息
+     * @param id  传感器id号
+     * @return sensorinfo 传感器类
+     * */
+    sensorinfo findSensorById(String id);
+
+
+    /**
+     * @brief 根据设备id和是否可控制查询传感器
+     * @param control 是否可控制
+     * @param devId  设备id号
+     * @return  相关传感器列表
+     *
+     * */
+    List<sensorinfo> findSensorByControl(String devId,int control);
+
+    /**
+     * @brief 添加传感器
+     * @param s  传感器类
+     * @return 数据库影响的行数
+     * */
+    int addSensor(sensorinfo s);
+
+
+    /**
+     * @brief 更新传感器信息
+     * @param s  传感器对象
+     * @return 数据库影响的行数
+     * */
+    int updateSensor(sensorinfo s);
+
+    /**
+     * @brief 删除传感器
+     * @param s  传感器类
+     * @return 数据库影响的行数
+     *
+     * */
+    int deleteSensor(String id);
+
 }

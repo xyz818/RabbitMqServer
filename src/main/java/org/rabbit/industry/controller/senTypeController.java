@@ -20,14 +20,14 @@ public class senTypeController {
 //            @ApiImplicitParam(name = "user", value = "用户实体user", required = true, dataType = "User")
 //    })
     @ApiOperation(value = "查询所有传感器类型", notes = "所有传感器")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/sentype", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public String findSensorType() {
         return sts.findSensorType();
 
     }
 
     @ApiOperation(value = "根据控制类型查询传感器类型", notes = "可选传感器")
-    @RequestMapping(value = "/{control}", method = RequestMethod.GET)
+    @RequestMapping(value = "/sentype/{control}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "control", value = "是否可控制", required = true, dataType = "int", paramType = "path")
     })
@@ -36,7 +36,7 @@ public class senTypeController {
     }
 
     @ApiOperation(value = "添加传感器类型数据", notes = "添加")
-    @RequestMapping(value = "/add", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sentype", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "对象json包数据", required = true, dataType = "String")
     })

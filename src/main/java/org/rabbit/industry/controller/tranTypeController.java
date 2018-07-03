@@ -21,7 +21,7 @@ public class tranTypeController {
 
 
     @ApiOperation(value = "查询所有传输类型", notes = "所有传输类型")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/trantype", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public String findTranType()
     {
 
@@ -30,7 +30,7 @@ public class tranTypeController {
     }
 
     @ApiOperation(value = "添加传输类型", notes = "添加内容")
-    @RequestMapping(value = "/add", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/trantype", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "数据json", required = true, dataType = "String")
     })
