@@ -33,5 +33,4 @@ public class funcInfoController {
         return fis.addFuncType(json);
     }
 
-
 }
