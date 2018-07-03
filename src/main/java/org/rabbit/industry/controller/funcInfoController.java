@@ -17,15 +17,14 @@ public class funcInfoController {
     @Autowired
     funcInfoServ fis;
 
-
     @ApiOperation(value = "查询所有控制类型", notes = "控制类型")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public String findFuncType() {
         return fis.findFuncType();
     }
 
     @ApiOperation(value = "添加控制类型", notes = "添加控制内容")
-    @RequestMapping(value = "/add", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "数据json", required = true, dataType = "String")
     })
