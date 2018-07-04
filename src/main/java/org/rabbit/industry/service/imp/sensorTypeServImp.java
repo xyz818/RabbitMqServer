@@ -79,4 +79,10 @@ public class sensorTypeServImp implements sensorTypeServ {
         return row;
     }
 
+    @Override
+    public String selSenTypeByTid(String tid) {
+        List<sensorTypeInfo> list = std.selSenTypeByTid(tid);
+        return formatToJSON(list);
+    }
+
 }

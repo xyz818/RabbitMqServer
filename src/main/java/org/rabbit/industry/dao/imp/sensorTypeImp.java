@@ -59,5 +59,18 @@ public class sensorTypeImp implements sensorTypeDao {
         return row;
     }
 
+    @Override
+    public List<sensorTypeInfo> selSenTypeByTid(String tid) {
+        List<sensorTypeInfo> list = new ArrayList<>();
+        try
+        {
+            String sql = "select * from sensortypeinfo a inner join sensortrantype b on a.sti_id = b.sti_id where b.tti_id = ?";
+            list = jdbc.query(sql,new Object[]{tid},new BeanPropertyRowMapper(sensorTypeInfo.class));
+        }catch (Exception e)
+        {
+        }
+        return list;
+    }
+
 
 }

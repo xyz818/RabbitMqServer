@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
-
 @RestController
 @RequestMapping(value = "/sensorinfo")
 public class sensorInfoContoller {
@@ -22,6 +20,7 @@ public class sensorInfoContoller {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "devId", value = "设备id号", required = true, dataType = "String", paramType = "path")
     })
+    @ResponseBody
     public String findSensorByDevice(@PathVariable(value = "devId") String devId) {
         return sis.findSensorByDevice(devId);
     }
@@ -31,6 +30,7 @@ public class sensorInfoContoller {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Id", value = "传感器id号", required = true, dataType = "String", paramType = "path")
     })
+    @ResponseBody
     public String findSensorById(@PathVariable(value = "Id") String id) {
         return sis.findSensorById(id);
     }
@@ -40,6 +40,7 @@ public class sensorInfoContoller {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "设备与控制json包", required = true, dataType = "String")
     })
+    @ResponseBody
     public String findSensorByControl(@RequestBody String json) {
         return sis.findSensorByControl(json);
     }
@@ -49,6 +50,7 @@ public class sensorInfoContoller {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "传感器数据包", required = true, dataType = "String")
     })
+    @ResponseBody
     public int addSensor(@RequestBody String json) {
         return sis.addSensor(json);
     }
@@ -58,8 +60,8 @@ public class sensorInfoContoller {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "传感器数据包", required = true, dataType = "String")
     })
-    public boolean updateSensor(String json)
-    {
+    @ResponseBody
+    public boolean updateSensor(String json) {
         return sis.updateSensor(json);
     }
 
@@ -69,11 +71,9 @@ public class sensorInfoContoller {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "传感器数据包", required = true, dataType = "String")
     })
-    public boolean deleteSensorInfo(String id)
-    {
+    public boolean deleteSensorInfo(String id) {
         return sis.deleteSensor(id);
     }
-
 
 
 }

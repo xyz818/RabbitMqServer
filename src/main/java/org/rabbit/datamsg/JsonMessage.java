@@ -11,34 +11,17 @@ public class JsonMessage {
         JsonModel jsonModel = new JsonModel();
         try {
 
-            JSONObject jsonObject = JSONObject.fromObject(json);
-            if (jsonObject.has("fromwhere"))
-                jsonModel.setFromWhere(jsonObject.getString("fromwhere"));
-
-            if (jsonObject.has("localid"))
-                jsonModel.setLocalId(jsonObject.getString("localid"));
-
-            if (jsonObject.has("targetid"))
-                jsonModel.setTargetId(jsonObject.getString("targetid"));
-
-            if (jsonObject.has("value"))
-                jsonModel.setValue(jsonObject.getString("value"));
-
-            if (jsonObject.has("nettype"))
-                jsonModel.setNetType(jsonObject.getInt("nettype"));
-
-            if (jsonObject.has("sensortype"))
-                jsonModel.setSensorType(jsonObject.getInt("sensortype"));
-
-            if (jsonObject.has("transtype"))
-                jsonModel.setTranType(jsonObject.getString("transtype"));
-
-            if (jsonObject.has("voltage"))
-                jsonModel.setVoltage(jsonObject.getString("voltage"));
-
-            if (jsonObject.has("func"))
-                jsonModel.setFunc(jsonObject.getInt("func"));
-
+            JSONObject js = JSONObject.fromObject(json);
+            if(js.has("deviceId") && js.has("sensorId") && js.has("key"))
+            {
+                jsonModel.setKey(js.getString("key"));
+                jsonModel.setDeviceId(js.getString("deviceId"));
+                jsonModel.setSensorId(js.getString("sensorId"));
+                if(js.has("code"))
+                    jsonModel.setCode(js.getString("code"));
+                if(js.has("data"))
+                    jsonModel.setData(js.getJSONObject("data"));
+            }
         } catch (Exception e) {
 
         }

@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.rabbit.industry.service.senTranTypeServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/senortrantype")
@@ -24,6 +21,7 @@ public class senTranTypeController  {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "数据json", required = true, dataType = "String")
     })
+    @ResponseBody
     public int addSTtype(@RequestBody String json)
     {
         return stts.addSTtype(json);

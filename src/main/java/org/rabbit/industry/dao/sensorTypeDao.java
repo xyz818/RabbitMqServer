@@ -23,4 +23,8 @@ public interface sensorTypeDao {
       *
       * */
      int addSensorType(sensorTypeInfo sensorTypeInfo);
+
+
+     List<sensorTypeInfo> selSenTypeByTid(String tid);
+
 }

@@ -1,91 +1,55 @@
 package org.rabbit.datamsg;
 
 
+import net.sf.json.JSONObject;
+
 public class JsonModel {
-    public String fromWhere; //来自哪里
-    public String localId; //本地id
-    public String targetId; //目标id
-    public String value; // 数值
-    public int netType; //　网络传输类型
-    public int sensorType; //　传感器类型
-    public String voltage; //　电压
-    public int func; //　功能
-    public String tranType; //传输类型
 
-    public int getSensorType() {
-        return sensorType;
+    public String deviceId; //本地id
+    public String sensorId; //目标id
+    public String key; // 密钥
+    public String code; //　网络传输类型
+    public JSONObject data;
+    public JsonModel() {
     }
 
-    public void setSensorType(int sensorType) {
-        this.sensorType = sensorType;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public int getFunc() {
-        return func;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
-    public void setFunc(int func) {
-        this.func = func;
+    public String getSensorId() {
+        return sensorId;
     }
 
-
-    public String getTranType() {
-        return tranType;
+    public void setSensorId(String sensorId) {
+        this.sensorId = sensorId;
     }
 
-    public void setTranType(String tranType) {
-        this.tranType = tranType;
+    public String getKey() {
+        return key;
     }
 
-
-    public String getFromWhere() {
-        return fromWhere;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public void setFromWhere(String fromWhere) {
-        this.fromWhere = fromWhere;
+    public String getCode() {
+        return code;
     }
 
-    public String getLocalId() {
-        return localId;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public void setLocalId(String localId) {
-        this.localId = localId;
+    public JSONObject getData() {
+        return data;
     }
 
-    public String getTargetId() {
-        return targetId;
+    public void setData(JSONObject data) {
+        this.data = data;
     }
-
-    public void setTargetId(String targetId) {
-        this.targetId = targetId;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public int getNetType() {
-        return netType;
-    }
-
-    public void setNetType(int netType) {
-        this.netType = netType;
-    }
-
-
-    public String getVoltage() {
-        return voltage;
-    }
-
-    public void setVoltage(String voltage) {
-        this.voltage = voltage;
-    }
-
-
 }

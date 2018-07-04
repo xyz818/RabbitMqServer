@@ -6,6 +6,8 @@ import org.rabbit.datamsg.JsonMessage;
 import org.rabbit.datamsg.JsonModel;
 import org.rabbit.industry.model.historyrecord;
 import org.rabbit.industry.service.historyServ;
+
+import org.rabbit.industry.service.proDeviceServ;
 import org.rabbit.industry.service.userserv;
 import org.rabbit.mqtt.MqttMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -27,17 +29,23 @@ public class TopicRecSQL {
     MqttMessage mqttMessage;
     @RabbitHandler
     public void process(String msg) {
-        System.out.println("topic.sql: 正在写入历史数据库信息" );
-        JsonModel jm = JsonMessage.JsonToModel(msg);//json格式信息转换
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//时间格式信息
-        String time = sf.format(new Date());//获取当天的时间信息
+        try {
+            System.out.println("topic.sql: 正在写入历史数据库信息");
+            JsonModel jm = JsonMessage.JsonToModel(msg);//json格式信息转换
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//时间格式信息
+            String time = sf.format(new Date());//获取当天的时间信息
 
-        historyrecord hr = new historyrecord(jm.getLocalId(),jm.getTargetId(),Timestamp.valueOf(time),jm.getNetType(),jm.getValue(),jm.getVoltage());
-        if(hs.saveHistory(hr)>0)
-            System.out.println("数据库更新成功");
-        mqttMessage.sendMsg("/downstream/hello","recive from cloud");
-        System.out.println("rsendnsdnsdf");
-
+//        String deviceId = jm.getDeviceId();
+//        int proId = pds.selProjectIdByDeviceID(deviceId);
+//        if(proId>0)
+            historyrecord hr = new historyrecord(jm.getDeviceId(), jm.getSensorId(), Timestamp.valueOf(time), jm.getData().getString("value"));
+            if (hs.saveHistory(hr))
+                System.out.println("数据库更新成功");
+//        mqttMessage.sendMsg("/downstream/hello","recive from cloud");
+            System.out.println("rsendnsdnsdf");
+        }catch (Exception e){
+            System.out.println("无效的数据流");
+        }
     }
 
 }

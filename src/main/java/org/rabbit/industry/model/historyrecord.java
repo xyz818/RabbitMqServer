@@ -3,84 +3,80 @@ package org.rabbit.industry.model;
 import java.sql.Timestamp;
 
 public class historyrecord {
+    private int hr_seq;
+    private String di_id;
+    private String sei_id;
+    private Timestamp hr_time;
+    private String hr_value;
+    private int pi_seq;
+    private String hr_param;
 
-    private String rid;
-    private String sid;
-    private Timestamp time;
-    private int contype;
-    private String value;
-    private String voltage;
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-
-    public String getRid() {
-        return rid;
+    public historyrecord( String di_id, String sei_id, Timestamp hr_time, String hr_value) {
+//        this.hr_seq = hr_seq;
+        this.di_id = di_id;
+        this.sei_id = sei_id;
+        this.hr_time = hr_time;
+        this.hr_value = hr_value;
+//        this.pi_seq = pi_seq;
+//        this.hr_param = hr_param;
     }
 
-    public void setRid(String rid) {
-        this.rid = rid;
+    public historyrecord() {
     }
 
-    public String getSid() {
-        return sid;
+    public int getHr_seq() {
+        return hr_seq;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setHr_seq(int hr_seq) {
+        this.hr_seq = hr_seq;
     }
 
-    public Timestamp getTime() {
-        return time;
+    public String getDi_id() {
+        return di_id;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public void setDi_id(String di_id) {
+        this.di_id = di_id;
     }
 
-    public int getContype() {
-        return contype;
+    public String getSei_id() {
+        return sei_id;
     }
 
-    public void setContype(int contype) {
-        this.contype = contype;
+    public void setSei_id(String sei_id) {
+        this.sei_id = sei_id;
     }
 
-    public String getValue() {
-        return value;
+    public Timestamp getHr_time() {
+        return hr_time;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setHr_time(Timestamp hr_time) {
+        this.hr_time = hr_time;
     }
 
-    public String getVoltage() {
-        return voltage;
+    public String getHr_value() {
+        return hr_value;
     }
 
-    public void setVoltage(String voltage) {
-        this.voltage = voltage;
+    public void setHr_value(String hr_value) {
+        this.hr_value = hr_value;
     }
 
-
-
-
-    public historyrecord( String rid, String sid, Timestamp time, int contype, String value, String voltage) {
-//        this.id = id;
-        this.rid = rid;
-        this.sid = sid;
-        this.time = time;
-        this.contype = contype;
-        this.value = value;
-        this.voltage = voltage;
+    public int getPi_seq() {
+        return pi_seq;
     }
 
-    public historyrecord(){}
+    public void setPi_seq(int pi_seq) {
+        this.pi_seq = pi_seq;
+    }
 
+    public String getHr_param() {
+        return hr_param;
+    }
 
-
+    public void setHr_param(String hr_param) {
+        this.hr_param = hr_param;
+    }
 }

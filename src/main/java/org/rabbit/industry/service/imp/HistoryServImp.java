@@ -11,8 +11,11 @@ public class HistoryServImp implements historyServ {
 
     @Autowired
     private historyDao hd;
+
     @Override
-    public int saveHistory(historyrecord hi) {
-        return hd.saveHistory(hi);
+    public boolean saveHistory(historyrecord hi) {
+        if (hd.saveHistory(hi) > 0)
+            return true;
+        return false;
     }
 }
