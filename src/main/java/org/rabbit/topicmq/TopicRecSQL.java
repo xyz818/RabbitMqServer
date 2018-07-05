@@ -7,9 +7,6 @@ import org.rabbit.datamsg.JsonModel;
 import org.rabbit.industry.model.historyrecord;
 import org.rabbit.industry.service.historyServ;
 
-import org.rabbit.industry.service.proDeviceServ;
-import org.rabbit.industry.service.userserv;
-import org.rabbit.mqtt.MqttMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +22,7 @@ public class TopicRecSQL {
     @Autowired
     private historyServ hs;
 
-    @Autowired
-    MqttMessage mqttMessage;
+
     @RabbitHandler
     public void process(String msg) {
         try {

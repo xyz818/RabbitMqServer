@@ -24,34 +24,24 @@ public class sensorTypeServImp implements sensorTypeServ {
         JSONArray js = new JSONArray();
         for(sensorTypeInfo s:list)
         {
-            JSONObject j = new JSONObject();
-            System.out.println(s.getSti_id()+","+s.getSti_name());
-            j.put("sti_id",s.getSti_id());
-            j.put("sti_name",s.getSti_name());
-            j.put("sti_unit",s.getSti_unit());
-            j.put("sti_control",s.getSti_control());
-            js.add(j);
+//            JSONObject j = new JSONObject();
+//            System.out.println(s.getSti_id()+","+s.getSti_name());
+
+            js.add(JSONObject.fromObject(s));
         }
         return js.toString();
     }
 
     private sensorTypeInfo fomatToList(String Json)
     {
-        sensorTypeInfo s = new sensorTypeInfo();
+
         JSONObject j = JSONObject.fromObject(Json);
         if(j.has("sti_id")) {
-            s.setSti_id(j.getString("sti_id"));
-            if(j.has("sti_name"))
-                s.setSti_name(j.getString("sti_name"));
-            if(j.has("sti_control"))
-                s.setSti_control((short) j.getInt("sti_control"));
-            if(j.has("sti_unit"))
-                s.setSti_unit(j.getString("sti_unit"));
-
+           sensorTypeInfo s = (sensorTypeInfo) JSONObject.toBean(j,sensorTypeInfo.class);
+            return s;
         }
-        else
-            return null;
-        return s;
+
+        return null;
 
 
 
@@ -80,8 +70,8 @@ public class sensorTypeServImp implements sensorTypeServ {
     }
 
     @Override
-    public String selSenTypeByTid(String tid) {
-        List<sensorTypeInfo> list = std.selSenTypeByTid(tid);
+    public String selSenTypeByTid(String tid,int control) {
+        List<sensorTypeInfo> list = std.selSenTypeByTid(tid,control);
         return formatToJSON(list);
     }
 

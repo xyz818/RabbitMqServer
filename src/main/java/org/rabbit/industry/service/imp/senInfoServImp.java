@@ -2,6 +2,7 @@ package org.rabbit.industry.service.imp;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.rabbit.industry.dao.imp.devSenImp;
 import org.rabbit.industry.dao.sensorInfoDao;
 import org.rabbit.industry.model.sensorinfo;
 import org.rabbit.industry.service.senInfoServ;
@@ -15,6 +16,9 @@ public class senInfoServImp implements senInfoServ {
     @Autowired
     sensorInfoDao sid;
 
+    @Autowired
+    devSenImp dsi;
+
     @Override
     public String findSensorByDevice(String id) {
         List<sensorinfo> list = sid.findSensorByDevice(id);
@@ -22,7 +26,6 @@ public class senInfoServImp implements senInfoServ {
         for (sensorinfo s : list) {
             js.add(formatToObject(s));
         }
-
         return js.toString();
     }
 
@@ -31,7 +34,7 @@ public class senInfoServImp implements senInfoServ {
      */
     private JSONObject formatToObject(sensorinfo s) {
         JSONObject j = new JSONObject();
-        j.put("sei_seq", s.getSei_seq());
+//        j.put("sei_seq", s.getSei_seq());
         j.put("sei_id", s.getSei_id());
         j.put("sti_id", s.getSti_id());
         j.put("tti_id", s.getTti_id());
@@ -39,7 +42,7 @@ public class senInfoServImp implements senInfoServ {
         j.put("sei_mac", s.getSei_mac());
         j.put("sti_name", s.getSti_name());
         j.put("tti_name", s.getTti_name());
-
+        j.put("di_id",s.getDi_id());
         return j;
     }
 
@@ -49,11 +52,12 @@ public class senInfoServImp implements senInfoServ {
     private sensorinfo formatToSensorInfo(String json) {
         try {
             JSONObject j = JSONObject.fromObject(json);
-            if (j.has("sei_id") && j.has("sti_id") && j.has("tti_id")) {
+            if (j.has("sei_id") && j.has("sti_id") && j.has("tti_id") && j.has("di_id")) {
                 sensorinfo s = new sensorinfo();
                 s.setSei_id(j.getString("sei_id"));
                 s.setSti_id(j.getString("sti_id"));
                 s.setTti_id(j.getString("tti_id"));
+                s.setDi_id(j.getString("di_id"));
                 if (j.has("sei_mac"))
                     s.setSei_mac(j.getString("sei_mac"));
                 if (j.has("sei_value"))
@@ -104,7 +108,8 @@ public class senInfoServImp implements senInfoServ {
         try {
             sensorinfo s = formatToSensorInfo(json);  //json转sensorinfo对象
             if (s != null)
-                row = sid.addSensor(s);
+                if (sid.addSensor(s) > 0)
+                    row = dsi.saveDevSenor(s.getDi_id(), s.getSei_id());  //添加到关联表信息
         } catch (Exception e) {
         }
         return row;
@@ -124,14 +129,12 @@ public class senInfoServImp implements senInfoServ {
 
     @Override
     public boolean deleteSensor(String id) {
-
-        try
-        {
-          if(sid.deleteSensor(id) > 0)
-              return true;
+        try {
+            if (sid.deleteSensor(id) > 0)
+                if (dsi.delDevSenor(id) > 0)
+                    return true;
+        } catch (Exception e) {
         }
-        catch (Exception e)
-        {}
         return false;
     }
 }

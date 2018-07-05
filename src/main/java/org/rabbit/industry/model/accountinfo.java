@@ -11,68 +11,61 @@ public class accountinfo {
     {
 
     }
-    public accountinfo(String id, String code, String pwsd, String iphone,String key,String scId)
-    {
-        this.id = id;
-        this.code = code;
-        this.pwsd = pwsd;
-        this.phone = iphone;
-        this.key = key;
-        this.scId = scId;
+
+    private String aci_id;//id号
+    private String aci_code;//用户明
+    private String aci_pwd;//密码
+    private String aci_phone;//电话
+    private String aci_key;//秘钥
+
+    public String getAci_id() {
+        return aci_id;
     }
 
-    private String id;//id号
-    private String code;//用户明
-    private String pwsd;//密码
-    private String phone;//电话
-    private String key;//秘钥
-    private String scId;//学校id号
-
-    public String getId() {
-        return id;
+    public void setAci_id(String aci_id) {
+        this.aci_id = aci_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getAci_code() {
+        return aci_code;
     }
 
-    public String getCode() {
-        return code;
+    public void setAci_code(String aci_code) {
+        this.aci_code = aci_code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public String getAci_pwd() {
+        return aci_pwd;
     }
 
-    public String getPwsd() {
-        return pwsd;
+    public void setAci_pwd(String aci_pwd) {
+        this.aci_pwd = aci_pwd;
     }
 
-    public void setPwsd(String pwsd) {
-        this.pwsd = pwsd;
+    public String getAci_phone() {
+        return aci_phone;
     }
 
-    public String getPhone() {
-        return phone;
+    public void setAci_phone(String aci_phone) {
+        this.aci_phone = aci_phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getAci_key() {
+        return aci_key;
     }
 
-    public String getKey() {
-        return key;
+    public void setAci_key(String aci_key) {
+        this.aci_key = aci_key;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public String getSci_Id() {
+        return sci_Id;
     }
 
-    public String getScId() {
-        return scId;
+    public void setSci_Id(String sci_Id) {
+        this.sci_Id = sci_Id;
     }
 
-    public void setScId(String scId) {
-        this.scId = scId;
-    }
+    private String sci_Id;//学校id号
+
 }

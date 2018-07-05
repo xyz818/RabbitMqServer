@@ -1,91 +1,74 @@
 package org.rabbit.industry.model;
 
 public class schoolinfo {
-    private String id;   //id
-    private String name; //名称
-    private String city;  //城市
-    private String person;//联系人
-    private String phone;//电话
-    private String address;//地址
-    private String brief;//简介
+    private String sci_id;   //id
+    private String sci_name; //名称
+    private String sci_city;  //城市
+    private String sci_person;//联系人
+    private String sci_phone;//电话
+    private String sci_address;//地址
 
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String sci_brief;//简介
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPerson() {
-        return person;
-    }
-
-    public void setPerson(String person) {
-        this.person = person;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getBrief() {
-        return brief;
-    }
-
-    public void setBrief(String brief) {
-        this.brief = brief;
+    public schoolinfo() {
     }
 
 
-
-    public String getId() {
-        return id;
+    public String getSci_id() {
+        return sci_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSci_id(String sci_id) {
+        this.sci_id = sci_id;
     }
 
-    public schoolinfo()
-    {
-
-    }
-    //构造函数
-    public schoolinfo(String id,String name,String city,String person,String phone,String address,String breif)
-    {
-        this.id = id;
-        this.name = name;
-        this.city = city;
-        this.person = person;
-        this.phone = phone;
-        this.address = address;
-        this.brief = breif;
-
+    public String getSci_name() {
+        return sci_name;
     }
 
+    public void setSci_name(String sci_name) {
+        this.sci_name = sci_name;
+    }
 
+    public String getSci_city() {
+        return sci_city;
+    }
 
+    public void setSci_city(String sci_city) {
+        this.sci_city = sci_city;
+    }
 
+    public String getSci_person() {
+        return sci_person;
+    }
+
+    public void setSci_person(String sci_person) {
+        this.sci_person = sci_person;
+    }
+
+    public String getSci_phone() {
+        return sci_phone;
+    }
+
+    public void setSci_phone(String sci_phone) {
+        this.sci_phone = sci_phone;
+    }
+
+    public String getSci_address() {
+        return sci_address;
+    }
+
+    public void setSci_address(String sci_address) {
+        this.sci_address = sci_address;
+    }
+
+    public String getSci_brief() {
+        return sci_brief;
+    }
+
+    public void setSci_brief(String sci_brief) {
+        this.sci_brief = sci_brief;
+    }
 }

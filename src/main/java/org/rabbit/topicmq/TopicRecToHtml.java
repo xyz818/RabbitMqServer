@@ -3,6 +3,7 @@ package org.rabbit.topicmq;
 import org.rabbit.datamsg.JsonMessage;
 import org.rabbit.datamsg.JsonModel;
 import org.rabbit.industry.service.proDeviceServ;
+import org.rabbit.mqtt.MqttMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import java.text.SimpleDateFormat;
 public class TopicRecToHtml {
     @Autowired
     private proDeviceServ pds;
+    @Autowired
+    MqttMessage mqttMessage;
 
     @RabbitHandler
     public void process(String msg) {
@@ -28,7 +31,7 @@ public class TopicRecToHtml {
         String deviceId = jm.getDeviceId();
         int proId = pds.selProjectIdByDeviceID(deviceId);
         if (proId > 0)
-            System.out.println("topic.html  : 正在上传html信息");
+            mqttMessage.sendMsg("/uptohtml/" + proId, msg);
     }
 
 }

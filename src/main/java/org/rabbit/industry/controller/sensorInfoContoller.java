@@ -67,11 +67,11 @@ public class sensorInfoContoller {
 
 
     @ApiOperation(value = "删除传感器数据", notes = "传感器json数组")
-    @RequestMapping(value = "/sensor", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sensor/{id}", method = RequestMethod.DELETE)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "json", value = "传感器数据包", required = true, dataType = "String")
+            @ApiImplicitParam(name = "id", value = "传感器id号", required = true, dataType = "String",paramType = "path")
     })
-    public boolean deleteSensorInfo(String id) {
+    public boolean deleteSensorInfo(@PathVariable(value = "id") String id) {
         return sis.deleteSensor(id);
     }
 

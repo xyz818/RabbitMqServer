@@ -49,15 +49,15 @@ public class senTypeController {
     }
 
     @ApiOperation(value = "根据传输类型查询传感器", notes = "根据传输类型查询传感器")
-    @RequestMapping(value = "/{tid}/sentype", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{tid}/sentype/{control}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "tid", value = "传感器传输类型", required = true, dataType = "String",paramType = "path")
+            @ApiImplicitParam(name = "tid", value = "传感器传输类型", required = true, dataType = "String",paramType = "path"),
+            @ApiImplicitParam(name = "control", value = "是否可控制", required = true, dataType = "int",paramType = "path")
     })
     @ResponseBody
-    public String selSenTypeByTid(@PathVariable(value = "tid") String tid)
+    public String selSenTypeByTid(@PathVariable(value = "tid") String tid,@PathVariable(value = "control") int control)
     {
-        return sts.selSenTypeByTid(tid);
-
+        return sts.selSenTypeByTid(tid,control);
     }
 
 

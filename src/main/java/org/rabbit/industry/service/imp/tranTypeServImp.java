@@ -8,6 +8,7 @@ import org.rabbit.industry.model.tranTypeInfo;
 import org.rabbit.industry.service.tranTypeServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
 
@@ -21,10 +22,7 @@ public class tranTypeServImp implements tranTypeServ {
         List<tranTypeInfo> list = ttd.findTranType();
         JSONArray js = new JSONArray();
         for (tranTypeInfo t : list) {
-            JSONObject j = new JSONObject();
-            j.put("tti_id", t.getTti_id());
-            j.put("tti_name", t.getTti_name());
-            js.add(j);
+            js.add(JSONObject.fromObject(t));
         }
         return js.toString();
     }

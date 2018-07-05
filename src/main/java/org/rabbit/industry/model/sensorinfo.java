@@ -1,13 +1,22 @@
 package org.rabbit.industry.model;
 
 public class sensorinfo {
-    private int sei_seq;
+//    private int sei_seq;
     private String sei_id;//节点id
     private String sti_id;//类型id
     private String tti_id;//传输id
     private String sei_value;//当前值
     private String sei_mac;//mac地址
     private String sti_name;//传感器名称
+    private String di_id;
+
+    public String getDi_id() {
+        return di_id;
+    }
+
+    public void setDi_id(String di_id) {
+        this.di_id = di_id;
+    }
 
     public String getSti_name() {
         return sti_name;
@@ -30,24 +39,16 @@ public class sensorinfo {
     public sensorinfo() {
     }
 
-    public sensorinfo(int sei_seq, String sei_id, String sti_id, String tti_id, String sei_value, String sei_mac, String sti_name, String tti_name, String sei_param) {
-        this.sei_seq = sei_seq;
+    public sensorinfo(String sei_id, String sti_id, String tti_id, String sei_value, String sei_mac, String sti_name, String di_id, String tti_name, String sei_param) {
         this.sei_id = sei_id;
         this.sti_id = sti_id;
         this.tti_id = tti_id;
         this.sei_value = sei_value;
         this.sei_mac = sei_mac;
         this.sti_name = sti_name;
+        this.di_id = di_id;
         this.tti_name = tti_name;
         this.sei_param = sei_param;
-    }
-
-    public int getSei_seq() {
-        return sei_seq;
-    }
-
-    public void setSei_seq(int sei_seq) {
-        this.sei_seq = sei_seq;
     }
 
     public String getSei_id() {

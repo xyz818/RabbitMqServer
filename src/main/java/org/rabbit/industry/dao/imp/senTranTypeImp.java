@@ -11,19 +11,31 @@ public class senTranTypeImp implements senTranTypeDao {
 
     @Autowired
     private JdbcTemplate jdbc;
+
     /**
      * 插入传感器传输关联表
-     * */
+     */
     @Override
     public int addSTtype(sensortrantype s) {
         int row = 0;
-        try
-        {
-            String sql = "insert into sensortrantype(sti_id,tti_id) values(?,?)";
-            row = jdbc.update(sql,new Object[]{s.getSti_id(),s.getTti_id()});
+        try {
+            if (selSTCount(s) > 0) {
+                String sql = "insert into sensortrantype(sti_id,tti_id) values(?,?)";
+                row = jdbc.update(sql, new Object[]{s.getSti_id(), s.getTti_id()});
+            }
+        } catch (Exception e) {
         }
-        catch (Exception e)
-        {}
+        return row;
+    }
+
+    @Override
+    public int selSTCount(sensortrantype s) {
+        int row = 0;
+        try {
+            String sql = "select COUNT(*) from sensortrantype where sti_id=? and tti_id = ?";
+            row = jdbc.queryForObject(sql, Integer.class, new Object[]{s.getSti_id(), s.getTti_id()});
+        } catch (Exception e) {
+        }
         return row;
     }
 }

@@ -21,10 +21,7 @@ public class funcInfoServImp implements funcInfoServ {
         JSONArray js = new JSONArray();
         for(funcinfo f:list)
         {
-            JSONObject j = new JSONObject();
-            j.put("fui_id",f.getFui_id());
-            j.put("fui_name",f.getFui_name());
-            js.add(j);
+            js.add(JSONObject.fromObject(f));
 
         }
         return js.toString();
@@ -36,13 +33,7 @@ public class funcInfoServImp implements funcInfoServ {
         try
         {
             JSONObject j = JSONObject.fromObject(json);
-            funcinfo f = new funcinfo();
-            if(j.has("fui_id"))
-            {
-                f.setFui_id(j.getString("fui_id"));
-                if(j.has("fui_name"))
-                    f.setFui_name(j.getString("fui_name"));
-            }
+            funcinfo f = (funcinfo) JSONObject.toBean(j,funcinfo.class);
             row = fid.addFuncType(f);
         }catch (Exception e)
         {

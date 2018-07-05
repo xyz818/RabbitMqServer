@@ -9,4 +9,9 @@ public interface senTranTypeDao {
      * @return 数据库影响的行数
      * */
     int addSTtype(sensortrantype s);
+    /**
+     * @brief 查询是否重复
+     *
+     * */
+    int selSTCount(sensortrantype s);
 }

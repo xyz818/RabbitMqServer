@@ -153,7 +153,7 @@ public class RabbitMqApp extends SpringBootServletInitializer {
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(new String[] { "tcp://www.ftiotcloud.cn:1883" });
+        options.setServerURIs(new String[] { "tcp://139.196.218.156:1883" });
 //        options.setUserName("username");
 //        options.setPassword("password".toCharArray());
         options.setAutomaticReconnect(true); //自动重新链接
@@ -196,7 +196,7 @@ public class RabbitMqApp extends SpringBootServletInitializer {
 
         adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());
-        adapter.addTopics(new String[]{"/upstream/#","/downstream/#"},new int[]{1,1});
+        adapter.addTopics(new String[]{"/upstream/#"},new int[]{1});  //订阅主题
         adapter.setOutputChannel(mqttInputChannel());
         return adapter;
     }
