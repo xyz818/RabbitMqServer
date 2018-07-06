@@ -6,26 +6,17 @@ import java.sql.Timestamp;
 
 public class projectinfo {
     private String pti_id;  //项目类型
-
     private int pi_seq;
     private String pi_name;  //项目名称
     private Timestamp pi_time;//创建时间
     private int pi_status;//状态
     private String aci_id;//账户id
-    private String pi_param;
+
 
 
     public projectinfo(){}
 
-    public projectinfo(String pti_id, int pi_seq, String pi_name, Timestamp pi_time, int pi_status, String aci_id, String pi_param) {
-        this.pti_id = pti_id;
-        this.pi_seq = pi_seq;
-        this.pi_name = pi_name;
-        this.pi_time = pi_time;
-        this.pi_status = pi_status;
-        this.aci_id = aci_id;
-        this.pi_param = pi_param;
-    }
+
 
     public String getPti_id() {
         return pti_id;
@@ -75,11 +66,5 @@ public class projectinfo {
         this.aci_id = aci_id;
     }
 
-    public String getPi_param() {
-        return pi_param;
-    }
 
-    public void setPi_param(String pi_param) {
-        this.pi_param = pi_param;
-    }
 }

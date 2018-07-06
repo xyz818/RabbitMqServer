@@ -58,14 +58,25 @@ public class accountinfo {
         this.aci_key = aci_key;
     }
 
-    public String getSci_Id() {
-        return sci_Id;
+
+
+    public short getAci_role() {
+        return aci_role;
     }
 
-    public void setSci_Id(String sci_Id) {
-        this.sci_Id = sci_Id;
+    public void setAci_role(short aci_role) {
+        this.aci_role = aci_role;
     }
 
-    private String sci_Id;//学校id号
+    public String getSci_id() {
+        return sci_id;
+    }
+
+    public void setSci_id(String sci_id) {
+        this.sci_id = sci_id;
+    }
+
+    private short aci_role;
+    private String sci_id;//学校id号
 
 }

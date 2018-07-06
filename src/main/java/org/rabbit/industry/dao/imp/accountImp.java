@@ -34,6 +34,7 @@ public class accountImp implements accountDao {
         try {
             row = jdbc.update("update accountinfo set aci_code=?,aci_phone=? where aci_id = ?", new Object[]{a.getAci_code(), a.getAci_phone(), a.getAci_id()});
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return row;
     }
@@ -44,6 +45,7 @@ public class accountImp implements accountDao {
         try {
             row = jdbc.update("update accountinfo set aci_pwd =? where aci_id = ?", new Object[]{a.getAci_pwd(), a.getAci_id()});
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return row;
     }
@@ -55,6 +57,7 @@ public class accountImp implements accountDao {
             String sql = "select * from accountinfo";
             list = jdbc.query(sql, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }
@@ -66,6 +69,7 @@ public class accountImp implements accountDao {
             String sql = "select * from accountinfo where sci_id = ?";
             list = jdbc.query(sql, new Object[]{sid}, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }
@@ -77,6 +81,7 @@ public class accountImp implements accountDao {
             String sql = "select * from accountinfo where aci_id = ?";
             return (accountinfo) jdbc.queryForObject(sql, new Object[]{aid}, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -85,9 +90,10 @@ public class accountImp implements accountDao {
     public int addAccountInfo(accountinfo a) {
         int row = 0;
         try {
-            String sql = "insert into accountinfo(aci_id,aci_code,aci_pwd,aci_phone,aci_key,sci_id) values(?,?,?,?,?,?)";
-            row = jdbc.update(sql, new Object[]{a.getAci_id(), a.getAci_code(), a.getAci_pwd(), a.getAci_phone(), a.getAci_key(), a.getSci_Id()});
+            String sql = "insert into accountinfo(aci_id,aci_code,aci_pwd,aci_phone,aci_key,sci_id) values(?,?,?,?,?,?,?)";
+            row = jdbc.update(sql, new Object[]{a.getAci_id(), a.getAci_code(), a.getAci_pwd(), a.getAci_phone(), a.getAci_key(), a.getSci_id(),a.getAci_role()});
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return row;
     }
@@ -99,6 +105,7 @@ public class accountImp implements accountDao {
             String sql = "delete from accountinfo where aci_id = ?";
             row = jdbc.update(sql, new Object[]{aid});
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return row;
     }
