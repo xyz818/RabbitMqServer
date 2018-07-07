@@ -61,7 +61,7 @@ public class projectInfoServImp implements projectInfoServ {
     }
 
     @Override
-    public String findProject(String id) {
+    public String findProject(int id) {
         projectinfo p = pid.findProject(id);
         return JSONObject.fromObject(p).toString();
     }

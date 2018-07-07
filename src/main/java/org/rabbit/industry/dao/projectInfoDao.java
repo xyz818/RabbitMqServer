@@ -23,7 +23,7 @@ public interface projectInfoDao {
 
     int delProject(int p);
 
-    projectinfo findProject(String id);
+    projectinfo findProject(int id);
 
     int updateProjectStatus(projectinfo p);
 

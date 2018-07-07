@@ -1,7 +1,6 @@
 package org.rabbit.industry.model;
 
 public class deviceinfo {
-    private int di_seq; //自增id
     private String di_id; //设备id号
     private String di_mac;//设备ｍａｃ地址
     private String di_name;//设备名称
@@ -9,17 +8,11 @@ public class deviceinfo {
     private short di_type;//设备类型
     private short di_conttype;//链接类型
     private short di_status;//当前状态
-    private String di_param;
+
     public deviceinfo() {
     }
 
-    public int getDi_seq() {
-        return di_seq;
-    }
 
-    public void setDi_seq(int di_seq) {
-        this.di_seq = di_seq;
-    }
 
     public String getDi_id() {
         return di_id;
@@ -77,23 +70,6 @@ public class deviceinfo {
         this.di_status = di_status;
     }
 
-    public String getDi_param() {
-        return di_param;
-    }
 
-    public void setDi_param(String di_param) {
-        this.di_param = di_param;
-    }
 
-    public deviceinfo(int di_seq, String di_id, String di_mac, String di_name, String di_key, short di_type, short di_conttype, short di_status, String di_param) {
-        this.di_seq = di_seq;
-        this.di_id = di_id;
-        this.di_mac = di_mac;
-        this.di_name = di_name;
-        this.di_key = di_key;
-        this.di_type = di_type;
-        this.di_conttype = di_conttype;
-        this.di_status = di_status;
-        this.di_param = di_param;
-    }
 }

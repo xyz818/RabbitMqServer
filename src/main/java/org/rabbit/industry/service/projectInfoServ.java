@@ -23,7 +23,7 @@ public interface projectInfoServ {
 
     boolean delProject(int p);
 
-    String findProject(String id);
+    String findProject(int id);
     boolean updateProjectStatus(String json);
 
 }

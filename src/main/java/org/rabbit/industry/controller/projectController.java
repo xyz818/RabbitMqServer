@@ -25,7 +25,7 @@ public class projectController {
     @ApiOperation(value = "根据账户信息查询项目", notes = "根据账户信息查询项目")
     @RequestMapping(value = "/{aid}/project", method = RequestMethod.GET)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "aid", value = "数据json", required = true, dataType = "String",paramType = "path")
+            @ApiImplicitParam(name = "aid", value = "项目id号", required = true, dataType = "String",paramType = "path")
     })
     @ResponseBody
     public String findProjectByAccount(@PathVariable(value = "aid") String id)
@@ -36,10 +36,10 @@ public class projectController {
     @ApiOperation(value = "查询所有项目信息", notes = "查询所有项目信息")
     @RequestMapping(value = "/project/{pid}", method = RequestMethod.GET)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "pid", value = "项目id号", required = true, dataType = "String",paramType = "path")
+            @ApiImplicitParam(name = "pid", value = "项目id号", required = true, dataType = "int",paramType = "path")
     })
     @ResponseBody
-    public String findProjectById(@PathVariable(value = "pid") String id)
+    public String findProjectById(@PathVariable(value = "pid") int id)
     {
         return pis.findProject(id);
     }
@@ -82,7 +82,7 @@ public class projectController {
     @ApiOperation(value = "更新项目状态信息", notes = "更新项目状态信息")
     @RequestMapping(value = "/project/status", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "json", value = "json数据集", required = true, dataType = "int")
+            @ApiImplicitParam(name = "json", value = "json数据集", required = true, dataType = "String")
     })
     @ResponseBody
     public boolean updateProjectStatus(@RequestBody String json)

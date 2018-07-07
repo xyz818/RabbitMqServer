@@ -79,7 +79,7 @@ public class projectInfoImp implements projectInfoDao {
     }
 
     @Override
-    public projectinfo findProject(String id) {
+    public projectinfo findProject(int id) {
         try {
             String sql = "select * from projectinfo where pi_seq = ?";
             return (projectinfo) jdbc.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper(projectinfo.class));
