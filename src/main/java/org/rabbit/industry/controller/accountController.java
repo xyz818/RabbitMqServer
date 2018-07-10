@@ -47,7 +47,7 @@ public class accountController {
     @ResponseBody
     public boolean updatePwsd(@RequestBody String json) {
 
-        return asi.updateAccount(json);
+        return asi.updatePwsd(json);
     }
 
     @ApiOperation(value = "查询所有的用户", notes = "查询所有的用户")
