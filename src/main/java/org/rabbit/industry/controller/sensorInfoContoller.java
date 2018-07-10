@@ -9,14 +9,13 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/sensorinfo")
 public class sensorInfoContoller {
 
     @Autowired
     senInfoServ sis;
 
     @ApiOperation(value = "根据设备号查询所有传感器", notes = "传感器列表json")
-    @RequestMapping(value = "/{devId}/sensors", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{devId}/sensorinfo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "devId", value = "设备id号", required = true, dataType = "String", paramType = "path")
     })
@@ -26,7 +25,7 @@ public class sensorInfoContoller {
     }
 
     @ApiOperation(value = "根据传感器id号查询传感器", notes = "传感器json")
-    @RequestMapping(value = "/sensors/{Id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sensorinfo/{Id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Id", value = "传感器id号", required = true, dataType = "String", paramType = "path")
     })
@@ -36,7 +35,7 @@ public class sensorInfoContoller {
     }
 
     @ApiOperation(value = "根据设备号和控制类型查询传感器", notes = "传感器json数组")
-    @RequestMapping(value = "/devIdOnControl", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sensorinfo/devIdOnControl", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "设备与控制json包", required = true, dataType = "String")
     })
@@ -46,7 +45,7 @@ public class sensorInfoContoller {
     }
 
     @ApiOperation(value = "添加传感器数据", notes = "传感器json数组")
-    @RequestMapping(value = "/sensor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sensorinfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "传感器数据包", required = true, dataType = "String")
     })
@@ -56,7 +55,7 @@ public class sensorInfoContoller {
     }
 
     @ApiOperation(value = "更新传感器数据", notes = "传感器json数组")
-    @RequestMapping(value = "/sensor", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sensorinfo", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "传感器数据包", required = true, dataType = "String")
     })
@@ -67,7 +66,7 @@ public class sensorInfoContoller {
 
 
     @ApiOperation(value = "删除传感器数据", notes = "传感器json数组")
-    @RequestMapping(value = "/sensor/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/sensorinfo/{id}", method = RequestMethod.DELETE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "传感器id号", required = true, dataType = "String",paramType = "path")
     })

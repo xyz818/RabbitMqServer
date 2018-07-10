@@ -9,13 +9,12 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "projectinfo")
 public class projectController {
     @Autowired
     projectInfoServ pis;
 
     @ApiOperation(value = "查询所有项目信息", notes = "查询所有项目信息")
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/projectinfo", method = RequestMethod.GET)
     @ResponseBody
     public String findProject()
     {
@@ -23,7 +22,7 @@ public class projectController {
     }
 
     @ApiOperation(value = "根据账户信息查询项目", notes = "根据账户信息查询项目")
-    @RequestMapping(value = "/{aid}/project", method = RequestMethod.GET)
+    @RequestMapping(value = "/{aid}/projectinfo", method = RequestMethod.GET)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "aid", value = "项目id号", required = true, dataType = "String",paramType = "path")
     })
@@ -34,7 +33,7 @@ public class projectController {
     }
 
     @ApiOperation(value = "查询所有项目信息", notes = "查询所有项目信息")
-    @RequestMapping(value = "/project/{pid}", method = RequestMethod.GET)
+    @RequestMapping(value = "/projectinfo/{pid}", method = RequestMethod.GET)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pid", value = "项目id号", required = true, dataType = "int",paramType = "path")
     })
@@ -45,7 +44,7 @@ public class projectController {
     }
 
     @ApiOperation(value = "添加项目", notes = "添加项目")
-    @RequestMapping(value = "/", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/projectinfo", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "json数据信息", required = true, dataType = "String")
     })
@@ -56,7 +55,7 @@ public class projectController {
     }
 
     @ApiOperation(value = "更新项目", notes = "更新项目")
-    @RequestMapping(value = "/", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/projectinfo", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "json数据信息", required = true, dataType = "String")
     })
@@ -68,7 +67,7 @@ public class projectController {
 
 
     @ApiOperation(value = "删除项目", notes = "删除项目")
-    @RequestMapping(value = "/{pid}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/projectinfo/{pid}", method = RequestMethod.DELETE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "p", value = "项目id", required = true, dataType = "int")
     })
@@ -80,7 +79,7 @@ public class projectController {
 
 
     @ApiOperation(value = "更新项目状态信息", notes = "更新项目状态信息")
-    @RequestMapping(value = "/project/status", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/projectinfo/status", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "json数据集", required = true, dataType = "String")
     })
