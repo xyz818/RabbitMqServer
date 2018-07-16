@@ -8,6 +8,8 @@ import org.rabbit.industry.service.projectInfoServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,6 +32,7 @@ public class projectInfoServImp implements projectInfoServ {
         List<projectinfo> list = pid.findProjectByAccount(id);
         JSONArray js = new JSONArray();
         for (projectinfo p : list) {
+
             js.add(JSONObject.fromObject(p));
         }
         return js.toString();
@@ -39,6 +42,9 @@ public class projectInfoServImp implements projectInfoServ {
     public boolean addProject(String json) {
         JSONObject j = JSONObject.fromObject(json);
         projectinfo p = (projectinfo) JSONObject.toBean(j, projectinfo.class);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = timeFormat.format(new Date());
+        p.setPi_time(time);
         if (pid.addProject(p) > 0)
             return true;
         return false;

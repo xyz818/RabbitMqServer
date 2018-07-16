@@ -69,7 +69,7 @@ public class projectController {
     @ApiOperation(value = "删除项目", notes = "删除项目")
     @RequestMapping(value = "/projectinfo/{pid}", method = RequestMethod.DELETE)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "p", value = "项目id", required = true, dataType = "int")
+            @ApiImplicitParam(name = "pid", value = "项目id", required = true, dataType = "int",paramType = "path")
     })
     @ResponseBody
     public boolean delProject(@PathVariable(value = "pid") int p)

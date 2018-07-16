@@ -19,7 +19,7 @@ public class senInfoImp implements sensorInfoDao {
     public List<sensorinfo> findSensorByDevice(String id) {
         List<sensorinfo> list = new ArrayList<>();
         try {
-            String sql = "select a.sei_id,a.sti_id,a.tti_id,a.sei_mac,a.sei_value,d.tti_name,c.sti_name from sensorinfo a " +
+            String sql = "select a.sei_id,a.sti_id,a.tti_id,a.sei_mac,a.sei_value,d.tti_name,c.sti_name,c.sti_control,b.di_id from sensorinfo a " +
                     "inner join devicesensor b on a.sei_id = b.sei_id inner join sensortypeinfo c on c.sti_id = a.sti_id " +
                     "inner  join trantypeinfo d on d.tti_id = a.tti_id  where b.di_id = ?";
             list = jdbc.query(sql, new Object[]{id}, new BeanPropertyRowMapper(sensorinfo.class));
@@ -33,7 +33,7 @@ public class senInfoImp implements sensorInfoDao {
 
         sensorinfo s = null;
         try {
-            String sql = "select a.sei_id,a.sti_id,a.tti_id,a.sei_mac,a.sei_value,d.tti_name,c.sti_name,b.di_id from sensorinfo a " +
+            String sql = "select a.sei_id,a.sti_id,a.tti_id,a.sei_mac,a.sei_value,d.tti_name,c.sti_name,c.sti_control,b.di_id from sensorinfo a " +
                     " inner join devicesensor b on a.sei_id = b.sei_id " +
                     " inner join sensortypeinfo c on c.sti_id = a.sti_id " +
                     " inner  join trantypeinfo d on d.tti_id = a.tti_id  where a.sei_id = ?";
@@ -88,6 +88,23 @@ public class senInfoImp implements sensorInfoDao {
         } catch (Exception e) {
         }
         return row;
+    }
+
+    @Override
+    public List<sensorinfo> findSensorByProject(int pid) {
+        List<sensorinfo> list = new ArrayList<>();
+        try {
+
+            String sql = "select a.sei_id,a.sti_id,a.tti_id,a.sei_mac,a.sei_value,d.tti_name,c.sti_name,c.sti_control,b.di_id from sensorinfo a " +
+                    "inner join devicesensor b on a.sei_id = b.sei_id inner join sensortypeinfo c on c.sti_id = a.sti_id " +
+                    "inner  join trantypeinfo d on d.tti_id = a.tti_id  inner join projectdevice e on e.di_id = b.di_id where e.pi_seq = ?";
+            list = jdbc.query(sql, new Object[]{pid}, new BeanPropertyRowMapper(sensorinfo.class));
+
+        } catch (Exception e) {
+
+        }
+
+        return list;
     }
 
 

@@ -8,6 +8,16 @@ public class sensorinfo {
     private String sei_value;//当前值
     private String sei_mac;//mac地址
     private String sti_name;//传感器名称
+
+    public short getSti_control() {
+        return sti_control;
+    }
+
+    public void setSti_control(short sti_control) {
+        this.sti_control = sti_control;
+    }
+
+    private short sti_control;
     private String di_id;
 
     public String getDi_id() {
@@ -35,21 +45,11 @@ public class sensorinfo {
     }
 
     private String tti_name;//传输类型
-    private String sei_param;
+
     public sensorinfo() {
     }
 
-    public sensorinfo(String sei_id, String sti_id, String tti_id, String sei_value, String sei_mac, String sti_name, String di_id, String tti_name, String sei_param) {
-        this.sei_id = sei_id;
-        this.sti_id = sti_id;
-        this.tti_id = tti_id;
-        this.sei_value = sei_value;
-        this.sei_mac = sei_mac;
-        this.sti_name = sti_name;
-        this.di_id = di_id;
-        this.tti_name = tti_name;
-        this.sei_param = sei_param;
-    }
+
 
     public String getSei_id() {
         return sei_id;
@@ -91,11 +91,11 @@ public class sensorinfo {
         this.sei_mac = sei_mac;
     }
 
-    public String getSei_param() {
-        return sei_param;
-    }
-
-    public void setSei_param(String sei_param) {
-        this.sei_param = sei_param;
-    }
+//    public String getSei_param() {
+//        return sei_param;
+//    }
+//
+//    public void setSei_param(String sei_param) {
+//        this.sei_param = sei_param;
+//    }
 }

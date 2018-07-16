@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class loginrecord {
     private  int lr_seq;    //自增Ｉｄ
     private String aci_id;  //用户id
-    private Timestamp lr_time; //时间
+    private String lr_time; //时间
     private String lr_ip;  //登录ip地址
 
     public loginrecord() {
@@ -28,11 +28,11 @@ public class loginrecord {
         this.aci_id = aci_id;
     }
 
-    public Timestamp getLr_time() {
+    public String getLr_time() {
         return lr_time;
     }
 
-    public void setLr_time(Timestamp lr_time) {
+    public void setLr_time(String lr_time) {
         this.lr_time = lr_time;
     }
 

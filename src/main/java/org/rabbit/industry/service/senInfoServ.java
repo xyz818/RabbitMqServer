@@ -7,4 +7,6 @@ public interface senInfoServ {
     int addSensor(String json);
     boolean updateSensor(String json);
     boolean deleteSensor(String id);
+
+    String findSensorByProject(int pid);
 }

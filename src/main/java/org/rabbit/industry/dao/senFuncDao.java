@@ -2,6 +2,8 @@ package org.rabbit.industry.dao;
 
 import org.rabbit.industry.model.sensorfunc;
 
+import java.util.List;
+
 public interface senFuncDao {
     /**
      * @brief 添加传感器功能关联信息
@@ -10,4 +12,13 @@ public interface senFuncDao {
      *
      * */
     int addSFtype(sensorfunc s);
+
+
+    List<sensorfunc> selSensorFunc(String sid);
+
+
+    sensorfunc selSensorFuncByFuncId(String sid,String fid);
+
+
+
 }

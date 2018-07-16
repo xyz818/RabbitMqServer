@@ -19,7 +19,8 @@ public class projectInfoImp implements projectInfoDao {
     public List<projectinfo> findProJect() {
         List<projectinfo> list = new ArrayList<>();
         try {
-            String sql = "select * from projectinfo";
+            String sql = "select a.pi_seq,a.pti_id,a.pi_name,a.pi_time,a.pi_status,a.aci_id,b.pti_name from projectinfo a " +
+                    " inner  join  projecttypeinfo b on a.pti_id = b.pti_id";
             list = jdbc.query(sql, new BeanPropertyRowMapper(projectinfo.class));
 
         } catch (Exception e) {
@@ -32,8 +33,9 @@ public class projectInfoImp implements projectInfoDao {
     public List<projectinfo> findProjectByAccount(String id) {
         List<projectinfo> list = new ArrayList<>();
         try {
-            String sql = "select * from projectinfo where pi_seq = ?";
-            list = jdbc.query(sql, new Object[]{}, new BeanPropertyRowMapper(projectinfo.class));
+            String sql = "select a.pi_seq,a.pti_id,a.pi_name,a.pi_time,a.pi_status,a.aci_id,b.pti_name from projectinfo a " +
+                    "inner  join projecttypeinfo b  on a.pti_id = b.pti_id where aci_id = ?";
+            list = jdbc.query(sql, new Object[]{id}, new BeanPropertyRowMapper(projectinfo.class));
         } catch (Exception e) {
             e.printStackTrace();
         }

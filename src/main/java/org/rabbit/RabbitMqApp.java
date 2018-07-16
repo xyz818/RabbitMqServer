@@ -167,7 +167,7 @@ public class RabbitMqApp extends SpringBootServletInitializer {
     @ServiceActivator(inputChannel = "mqttOutboundChannel")
     public MessageHandler mqttOutbound() {
         MqttPahoMessageHandler messageHandler =
-                new MqttPahoMessageHandler("RbMqOut", mqttClientFactory());
+                new MqttPahoMessageHandler("RbMqOutTest", mqttClientFactory());
         messageHandler.setAsync(true);
         messageHandler.setDefaultQos(1);
 //        messageHandler.setDefaultTopic("testTopic");
@@ -192,7 +192,7 @@ public class RabbitMqApp extends SpringBootServletInitializer {
     @Bean
     public MessageProducer inbound() {
         MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter("RbMqIn",mqttClientFactory());
+                new MqttPahoMessageDrivenChannelAdapter("RbMqInTest",mqttClientFactory());
 
         adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());

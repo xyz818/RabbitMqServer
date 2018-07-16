@@ -3,17 +3,21 @@ package org.rabbit.industry.service.imp;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.rabbit.industry.dao.deviceInfoDao;
+import org.rabbit.industry.dao.proDeviceDao;
 import org.rabbit.industry.model.deviceinfo;
 import org.rabbit.industry.service.deviceInfoServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class deviceInfoServImp implements deviceInfoServ {
     @Autowired
     deviceInfoDao dvi;
+    @Autowired
+    proDeviceDao pdd;
     @Override
     public String findDeivceByProject(int pid) {
         JSONArray js = new JSONArray();
@@ -36,8 +40,13 @@ public class deviceInfoServImp implements deviceInfoServ {
     public boolean addDevice(String json) {
         JSONObject j = JSONObject.fromObject(json);
         deviceinfo d = (deviceinfo) JSONObject.toBean(j, deviceinfo.class);
-        if( dvi.addDevice(d) > 0)
-            return true;
+        if(d!=null)
+        {
+            d.setDi_key(UUID.randomUUID().toString().replaceAll("-","")); //生成随机密钥
+            if( dvi.addDevice(d) > 0 && pdd.addProDev(d.getDi_id(),d.getPi_seq())> 0)
+                return true;
+        }
+
         return false;
     }
 

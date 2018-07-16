@@ -8,11 +8,18 @@ public class projectinfo {
     private String pti_id;  //项目类型
     private int pi_seq;
     private String pi_name;  //项目名称
-    private Timestamp pi_time;//创建时间
+    private String pi_time;//创建时间
     private int pi_status;//状态
     private String aci_id;//账户id
+    private String pti_name;
 
+    public String getPti_name() {
+        return pti_name;
+    }
 
+    public void setPti_name(String pti_name) {
+        this.pti_name = pti_name;
+    }
 
     public projectinfo(){}
 
@@ -42,11 +49,11 @@ public class projectinfo {
         this.pi_name = pi_name;
     }
 
-    public Timestamp getPi_time() {
+    public String getPi_time() {
         return pi_time;
     }
 
-    public void setPi_time(Timestamp pi_time) {
+    public void setPi_time(String pi_time) {
         this.pi_time = pi_time;
     }
 

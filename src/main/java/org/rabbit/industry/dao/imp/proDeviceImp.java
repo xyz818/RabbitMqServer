@@ -24,4 +24,19 @@ public class proDeviceImp implements proDeviceDao {
         }
         return projectdevice;
     }
+
+    @Override
+    public int addProDev(String did, int pid) {
+        int row = 0;
+        try
+        {
+            String sql = "insert into projectdevice(pi_seq,di_id) value (?,?)";
+            row =  jdbc.update(sql,new Object[]{pid,did});
+        }
+        catch (Exception e)
+        {
+
+        }
+        return row;
+    }
 }

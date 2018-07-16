@@ -24,6 +24,18 @@ public class sensorInfoContoller {
         return sis.findSensorByDevice(devId);
     }
 
+
+    @ApiOperation(value = "根据项目查询所有传感器", notes = "根据项目查询所有传感器")
+    @RequestMapping(value = "/{pid}/device/sensorinfo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pid", value = "项目号", required = true, dataType = "int", paramType = "path")
+    })
+    @ResponseBody
+    public String findSensorByProject(@PathVariable(value = "pid") int pid) {
+        return sis.findSensorByProject(pid);
+    }
+
+
     @ApiOperation(value = "根据传感器id号查询传感器", notes = "传感器json")
     @RequestMapping(value = "/sensorinfo/{Id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({

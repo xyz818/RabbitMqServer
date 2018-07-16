@@ -39,7 +39,7 @@ public class deviceInifoController {
     @ApiOperation(value = "添加设备", notes = "添加设备")
     @RequestMapping(value = "/deviceinfo", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public boolean addDevice(String json)
+    public boolean addDevice(@RequestBody String json)
     {
         return dis.addDevice(json);
     }
@@ -55,7 +55,7 @@ public class deviceInifoController {
 
 
     @ApiOperation(value = "删除设备", notes = "删除设备")
-    @RequestMapping(value = "/deviceinfo/{did}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deviceinfo/{id}", method = RequestMethod.DELETE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "设备id", required = true, dataType = "String",paramType = "path")
     })

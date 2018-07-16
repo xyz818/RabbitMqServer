@@ -1,5 +1,6 @@
 package org.rabbit.industry.service.imp;
 
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.rabbit.industry.dao.imp.devSenImp;
@@ -24,53 +25,12 @@ public class senInfoServImp implements senInfoServ {
         List<sensorinfo> list = sid.findSensorByDevice(id);
         JSONArray js = new JSONArray();
         for (sensorinfo s : list) {
-            js.add(formatToObject(s));
+            js.add(JSONObject.fromObject(s));
         }
         return js.toString();
     }
 
-    /**
-     * @brief 传感器类转json对象
-     */
-    private JSONObject formatToObject(sensorinfo s) {
-        JSONObject j = new JSONObject();
-//        j.put("sei_seq", s.getSei_seq());
-        j.put("sei_id", s.getSei_id());
-        j.put("sti_id", s.getSti_id());
-        j.put("tti_id", s.getTti_id());
-        j.put("sei_value", s.getSei_value());
-        j.put("sei_mac", s.getSei_mac());
-        j.put("sti_name", s.getSti_name());
-        j.put("tti_name", s.getTti_name());
-        j.put("di_id",s.getDi_id());
-        return j;
-    }
 
-    /**
-     * @brief json数据转传感器对象
-     */
-    private sensorinfo formatToSensorInfo(String json) {
-        try {
-            JSONObject j = JSONObject.fromObject(json);
-            if (j.has("sei_id") && j.has("sti_id") && j.has("tti_id") && j.has("di_id")) {
-                sensorinfo s = new sensorinfo();
-                s.setSei_id(j.getString("sei_id"));
-                s.setSti_id(j.getString("sti_id"));
-                s.setTti_id(j.getString("tti_id"));
-                s.setDi_id(j.getString("di_id"));
-                if (j.has("sei_mac"))
-                    s.setSei_mac(j.getString("sei_mac"));
-                if (j.has("sei_value"))
-                    s.setSei_value(j.getString("sei_value"));
-                return s;
-            }
-
-        } catch (Exception e) {
-        }
-        return null;
-
-
-    }
 
 
     @Override
@@ -79,7 +39,7 @@ public class senInfoServImp implements senInfoServ {
         try {
             sensorinfo s = sid.findSensorById(id);
             if (s != null)
-                j = formatToObject(s);
+                j = JSONObject.fromObject(s);
         } catch (Exception e) {
         }
         return j.toString();
@@ -94,7 +54,7 @@ public class senInfoServImp implements senInfoServ {
             if (j.has("di_id") && j.has("sti_control")) {
                 List<sensorinfo> list = sid.findSensorByControl(j.getString("di_id"), j.getInt("sti_control"));
                 for (sensorinfo s : list) {
-                    js.add(formatToObject(s));
+                    js.add(JSONObject.fromObject(s));
                 }
             }
         } catch (Exception e) {
@@ -106,7 +66,8 @@ public class senInfoServImp implements senInfoServ {
     public int addSensor(String json) {
         int row = 0;
         try {
-            sensorinfo s = formatToSensorInfo(json);  //json转sensorinfo对象
+            JSONObject js = JSONObject.fromObject(json);
+            sensorinfo s = (sensorinfo) JSONObject.toBean(js,sensorinfo.class);  //json转sensorinfo对象
             if (s != null)
                 if (sid.addSensor(s) > 0)
                     row = dsi.saveDevSenor(s.getDi_id(), s.getSei_id());  //添加到关联表信息
@@ -118,7 +79,8 @@ public class senInfoServImp implements senInfoServ {
     @Override
     public boolean updateSensor(String json) {
         try {
-            sensorinfo s = formatToSensorInfo(json);//json转sensorinfo对象
+            JSONObject js = JSONObject.fromObject(json);
+            sensorinfo s = (sensorinfo) JSONObject.toBean(js,sensorinfo.class);  //json转sensorinfo对象
             if (s != null)
                 if (sid.updateSensor(s) > 0)
                     return true;
@@ -136,5 +98,16 @@ public class senInfoServImp implements senInfoServ {
         } catch (Exception e) {
         }
         return false;
+    }
+
+    @Override
+    public String findSensorByProject(int pid) {
+        List<sensorinfo> list = sid.findSensorByProject(pid);
+        JSONArray js = new JSONArray();
+        for(sensorinfo s : list)
+        {
+            js.add(JSONObject.fromObject(s));
+        }
+        return js.toString();
     }
 }

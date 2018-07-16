@@ -24,4 +24,31 @@ public class senFuncController {
         return sfs.addSFtype(json);
     }
 
+    @ApiOperation(value = "根据传感器id查询关联传感器与功能", notes = "查询关联传感器与功能")
+    @RequestMapping(value = "/{sid}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "sid", value = "传感器id", required = true, dataType = "String",paramType = "path")
+    })
+    @ResponseBody
+    public String selSensorFunc(@PathVariable(value = "sid") String sid)
+    {
+        return sfs.selSensorFunc(sid);
+    }
+
+    @ApiOperation(value = "根据传感器id,控制类型查询关联传感器与功能", notes = "根据传感器id,控制类型查询关联传感器与功能")
+    @RequestMapping(value = "/{sid}/{fid}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "sid", value = "传感器id", required = true, dataType = "String",paramType = "path"),
+            @ApiImplicitParam(name = "fid", value = "控制类型id", required = true, dataType = "String",paramType = "path")
+    })
+    @ResponseBody
+    public String selSensorFuncByFid(@PathVariable(value = "sid") String sid,@PathVariable(value = "fid") String fid)
+    {
+        return sfs.selSensorFuncByFid(sid,fid);
+    }
+
+
+
+
+
 }

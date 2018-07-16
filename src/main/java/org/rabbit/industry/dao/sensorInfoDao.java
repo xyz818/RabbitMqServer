@@ -53,4 +53,13 @@ public interface sensorInfoDao {
      * */
     int deleteSensor(String id);
 
+
+    /**
+     * @param pid 项目id号
+     * @author　xuyongzhe
+     * @brief 根据项目查询id
+     **/
+    List<sensorinfo> findSensorByProject(int pid);
+
+
 }

@@ -9,6 +9,15 @@ public class deviceinfo {
     private short di_conttype;//链接类型
     private short di_status;//当前状态
 
+    public int getPi_seq() {
+        return pi_seq;
+    }
+
+    public void setPi_seq(int pi_seq) {
+        this.pi_seq = pi_seq;
+    }
+
+    private int pi_seq;
     public deviceinfo() {
     }
 
