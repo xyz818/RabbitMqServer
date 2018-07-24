@@ -29,9 +29,13 @@ public class TopicRecToHtml {
         JsonModel jm = JsonMessage.JsonToModel(msg);//json格式信息转换
 //        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//时间格式信息
         String deviceId = jm.getDeviceId();
+        System.out.println("deviceId:"+deviceId);
         int proId = pds.selProjectIdByDeviceID(deviceId);
-        if (proId > 0)
+        System.out.println("项目id:"+proId);
+        if (proId > 0) {
+            System.out.println("tohtml");
             mqttMessage.sendMsg("/uptohtml/" + proId, msg);
+        }
     }
 
 }

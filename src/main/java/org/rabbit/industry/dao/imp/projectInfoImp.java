@@ -72,10 +72,14 @@ public class projectInfoImp implements projectInfoDao {
 
         int row = 0;
         try {
-            String sql = "delete from projectinfo where pi_seq = ?";
+            String sql = "delete  a,b,c,d,e from projectinfo a left join projectdevice b " +
+                    "on a.pi_seq=b.pi_seq left join deviceinfo c on " +
+                    "c.di_id = b.di_id left join  devicesensor d on " +
+                    "d.di_id = c.di_id left join sensorinfo e on " +
+                    "d.sei_id =e.sei_id where a.pi_seq = ?";
             row = jdbc.update(sql, new Object[]{id});
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return row;
     }

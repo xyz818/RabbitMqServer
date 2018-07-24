@@ -40,6 +40,7 @@ public class TopicRecSQL {
 //        mqttMessage.sendMsg("/downstream/hello","recive from cloud");
             System.out.println("rsendnsdnsdf");
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println("无效的数据流");
         }
     }
