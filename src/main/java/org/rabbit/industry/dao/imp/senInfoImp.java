@@ -107,5 +107,23 @@ public class senInfoImp implements sensorInfoDao {
         return list;
     }
 
+    /**
+     * @param sid 　传感器id
+     * @author　xuyongzhe
+     * @brief 实时更新传感器数据
+     **/
+    @Override
+    public int updateSensorValue(String value, String sid) {
+        int row = 0;
+        try {
+            String sql = "update sensorinfo set sei_value = ? where sei_id = ?";
+            row = jdbc.update(sql, new Object[]{value, sid});
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return row;
+    }
+
 
 }

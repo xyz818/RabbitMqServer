@@ -50,4 +50,10 @@ public class triggerInfoServImp implements triggerInfoServ {
 
         return false;
     }
+
+    @Override
+    public String findTriggerBySid(String sid) {
+        triggerinfo t = tid.findTriggerBySid(sid);
+        return JSONObject.fromObject(t).toString();
+    }
 }

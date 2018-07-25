@@ -62,4 +62,11 @@ public interface sensorInfoDao {
     List<sensorinfo> findSensorByProject(int pid);
 
 
+    /**
+     * @param sid　传感器id
+     * @author　xuyongzhe
+     * @brief 实时更新传感器数据
+     **/
+    int updateSensorValue(String value,String sid);
+
 }

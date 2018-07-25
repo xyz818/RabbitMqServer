@@ -20,7 +20,12 @@ public interface controllerInfoServ {
 
     boolean updateController(String json);
 
-
+    /**
+     * @param  id 触发id
+     * @author　xuyongzhe
+     * @brief 查询控制器id
+     **/
+    String findControllerByTrigId(String id);
 
 
 }

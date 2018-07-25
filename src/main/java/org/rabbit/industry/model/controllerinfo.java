@@ -6,6 +6,15 @@ public class controllerinfo  {
     private String coi_valuetype;
     private String coi_value;
     private String sei_id;
+    private short li_status;
+
+    public short getLi_status() {
+        return li_status;
+    }
+
+    public void setLi_status(short li_status) {
+        this.li_status = li_status;
+    }
 
     public controllerinfo() {
     }

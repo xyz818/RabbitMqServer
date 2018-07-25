@@ -70,4 +70,18 @@ public class triggerInfoImp implements triggerInfoDao {
 
         return row;
     }
+
+    @Override
+    public triggerinfo findTriggerBySid(String sid) {
+        try
+        {
+            String sql = "select * from triggerinfo where sei_id = ?";
+            return (triggerinfo) jdbc.queryForObject(sql,new Object[]{sid},new BeanPropertyRowMapper(triggerinfo.class));
+
+        }
+        catch (Exception e)
+        {}
+
+        return null;
+    }
 }

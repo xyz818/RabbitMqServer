@@ -15,5 +15,5 @@ public interface triggerInfoDao {
 
     int updateTrigger(triggerinfo t);
 
-
+    triggerinfo findTriggerBySid(String sid);
 }

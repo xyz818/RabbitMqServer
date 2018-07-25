@@ -9,4 +9,11 @@ public interface senInfoServ {
     boolean deleteSensor(String id);
 
     String findSensorByProject(int pid);
+
+    /**
+     * @param value 数值
+     * @author　xuyongzhe
+     * @brief 更新传感器信息数据值
+     **/
+    boolean updateSensorValue(String value,String id);
 }

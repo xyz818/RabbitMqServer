@@ -110,4 +110,17 @@ public class senInfoServImp implements senInfoServ {
         }
         return js.toString();
     }
+
+    /**
+     * @param value 数值
+     * @param id
+     * @author　xuyongzhe
+     * @brief 更新传感器信息数据值
+     **/
+    @Override
+    public boolean updateSensorValue(String value, String id) {
+        if(sid.updateSensorValue(value,id) > 0)
+            return  true;
+        return false;
+    }
 }

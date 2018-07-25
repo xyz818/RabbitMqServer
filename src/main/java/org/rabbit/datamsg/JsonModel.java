@@ -10,6 +10,25 @@ public class JsonModel {
     public String key; // 密钥
     public String code; //　网络传输类型
     public JSONObject data;
+    public String connecttype;
+    public String trantype;
+
+    public String getConnecttype() {
+        return connecttype;
+    }
+
+    public void setConnecttype(String connecttype) {
+        this.connecttype = connecttype;
+    }
+
+    public String getTrantype() {
+        return trantype;
+    }
+
+    public void setTrantype(String trantype) {
+        this.trantype = trantype;
+    }
+
     public JsonModel() {
     }
 

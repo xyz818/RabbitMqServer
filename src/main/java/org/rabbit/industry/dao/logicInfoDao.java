@@ -41,4 +41,12 @@ public interface logicInfoDao {
     int deleteLogic(String id);
 
 
+
+
+
+
+
+
+
+
 }

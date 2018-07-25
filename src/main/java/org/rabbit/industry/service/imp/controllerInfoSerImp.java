@@ -54,4 +54,16 @@ public class controllerInfoSerImp implements controllerInfoServ {
             return true;
         return false;
     }
+
+    /**
+     * @param id 触发id
+     * @author　xuyongzhe
+     * @brief 查询控制器id
+     **/
+    @Override
+    public String findControllerByTrigId(String id) {
+        controllerinfo c = cid.findControllerByTrigId(id);
+        return JSONObject.fromObject(c).toString();
+
+    }
 }

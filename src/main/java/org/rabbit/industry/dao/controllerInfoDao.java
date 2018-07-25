@@ -25,5 +25,12 @@ public interface controllerInfoDao {
 
     int updateController(controllerinfo c);
 
+    /**
+     * @param  sid 触发类传感器id
+     * @author　xuyongzhe
+     * @brief 根据触发器传感器id号查询控制类传感器id号
+     **/
+    controllerinfo findControllerByTrigId(String sid);
+
 
 }

@@ -3,6 +3,7 @@ package org.rabbit.industry.controller;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import net.sf.json.JSONObject;
 import org.rabbit.industry.service.controllerInfoServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -37,6 +38,7 @@ public class controlController {
     @ResponseBody
     public String findControllerByLogic(@PathVariable(value = "id") String id)
     {
+
         return cis.findControllerByLogic(id);
     }
 

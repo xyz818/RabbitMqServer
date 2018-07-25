@@ -17,13 +17,18 @@ public class JsonMessage {
                 jsonModel.setKey(js.getString("key"));
                 jsonModel.setDeviceId(js.getString("deviceId"));
                 jsonModel.setSensorId(js.getString("sensorId"));
+
                 if(js.has("code"))
                     jsonModel.setCode(js.getString("code"));
                 if(js.has("data"))
                     jsonModel.setData(js.getJSONObject("data"));
+                if(js.has("connecttype"))
+                    jsonModel.setConnecttype(js.getString("connecttype"));
+                if(js.has("trantype"))
+                    jsonModel.setTrantype(js.getString("trantype"));
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return jsonModel;
 
