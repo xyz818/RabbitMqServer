@@ -29,8 +29,6 @@ public class TopicRecLink {
     MqttMessage mqttMessage;
 
 
-
-
     @RabbitHandler
     public void process(String msg) {
         JsonModel jm = JsonMessage.JsonToModel(msg);//json格式信息转换
@@ -67,7 +65,7 @@ public class TopicRecLink {
                                 isOK = true;
                             break;
                     }
-                    if(isOK) {
+                    if (isOK) {
                         JSONObject data = new JSONObject();
                         data.put("func", cjs.getString("coi_value"));
                         jm.setData(data);
