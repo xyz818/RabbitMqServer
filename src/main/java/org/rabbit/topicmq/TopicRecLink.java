@@ -18,12 +18,18 @@ public class TopicRecLink {
 
     @Autowired
     private senInfoServ sis;
+
     @Autowired
     private triggerInfoServ tis;
+
     @Autowired
     private controllerInfoServ cis;
+
     @Autowired
     MqttMessage mqttMessage;
+
+
+
 
     @RabbitHandler
     public void process(String msg) {
