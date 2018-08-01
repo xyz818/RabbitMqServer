@@ -15,6 +15,14 @@ public class controlController {
     @Autowired
     controllerInfoServ cis;
 
+    @ApiOperation(value = "添加控制逻辑", notes = "添加控制逻辑")
+    @RequestMapping(value = "/controllerinfo", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public boolean addControllerInfo(@RequestBody String   json)
+    {
+        return cis.addControllerInfo(json);
+    }
+
 
 
     @ApiOperation(value = "根据项目查询逻辑", notes = "根据项目查询逻辑")
@@ -33,10 +41,10 @@ public class controlController {
     @ApiOperation(value = "根据逻辑id查询控制", notes = "根据逻辑id查询控制")
     @RequestMapping(value = "/project/{lid}/controllerinfo", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "逻辑id", required = true, dataType = "String",paramType = "path")
+            @ApiImplicitParam(name = "lid", value = "逻辑id", required = true, dataType = "String",paramType = "path")
     })
     @ResponseBody
-    public String findControllerByLogic(@PathVariable(value = "id") String id)
+    public String findControllerByLogic(@PathVariable(value = "lid") String id)
     {
 
         return cis.findControllerByLogic(id);

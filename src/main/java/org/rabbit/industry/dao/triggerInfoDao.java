@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface triggerInfoDao {
 
-
+    int addTriggerInfo(triggerinfo t);
     List<triggerinfo>  findTriggerByProject(int pid);
 
     List<triggerinfo> findTriggerByLogic(String id);

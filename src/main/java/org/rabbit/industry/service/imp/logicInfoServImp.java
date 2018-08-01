@@ -62,4 +62,15 @@ public class logicInfoServImp implements logicInfoServ {
             return true;
         return false;
     }
+
+    /**
+     * @param pid@author 　xuyongzhe
+     * @brief 根据项目删除逻辑id号
+     **/
+    @Override
+    public boolean deleteLogicByPid(int pid) {
+        if(lid.deleteLogicByProject(pid) >  0)
+            return true;
+        return false;
+    }
 }

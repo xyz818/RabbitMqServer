@@ -4,7 +4,9 @@ import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.rabbit.industry.dao.imp.devSenImp;
+import org.rabbit.industry.dao.senFuncInfoDao;
 import org.rabbit.industry.dao.sensorInfoDao;
+import org.rabbit.industry.model.sensorfuncinfo;
 import org.rabbit.industry.model.sensorinfo;
 import org.rabbit.industry.service.senInfoServ;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class senInfoServImp implements senInfoServ {
     @Autowired
     devSenImp dsi;
 
+    @Autowired
+    senFuncInfoDao sfid;
+
     @Override
     public String findSensorByDevice(String id) {
         List<sensorinfo> list = sid.findSensorByDevice(id);
@@ -29,8 +34,6 @@ public class senInfoServImp implements senInfoServ {
         }
         return js.toString();
     }
-
-
 
 
     @Override
@@ -67,7 +70,7 @@ public class senInfoServImp implements senInfoServ {
         int row = 0;
         try {
             JSONObject js = JSONObject.fromObject(json);
-            sensorinfo s = (sensorinfo) JSONObject.toBean(js,sensorinfo.class);  //json转sensorinfo对象
+            sensorinfo s = (sensorinfo) JSONObject.toBean(js, sensorinfo.class);  //json转sensorinfo对象
             if (s != null)
                 if (sid.addSensor(s) > 0)
                     row = dsi.saveDevSenor(s.getDi_id(), s.getSei_id());  //添加到关联表信息
@@ -80,7 +83,7 @@ public class senInfoServImp implements senInfoServ {
     public boolean updateSensor(String json) {
         try {
             JSONObject js = JSONObject.fromObject(json);
-            sensorinfo s = (sensorinfo) JSONObject.toBean(js,sensorinfo.class);  //json转sensorinfo对象
+            sensorinfo s = (sensorinfo) JSONObject.toBean(js, sensorinfo.class);  //json转sensorinfo对象
             if (s != null)
                 if (sid.updateSensor(s) > 0)
                     return true;
@@ -104,8 +107,7 @@ public class senInfoServImp implements senInfoServ {
     public String findSensorByProject(int pid) {
         List<sensorinfo> list = sid.findSensorByProject(pid);
         JSONArray js = new JSONArray();
-        for(sensorinfo s : list)
-        {
+        for (sensorinfo s : list) {
             js.add(JSONObject.fromObject(s));
         }
         return js.toString();
@@ -119,8 +121,58 @@ public class senInfoServImp implements senInfoServ {
      **/
     @Override
     public boolean updateSensorValue(String value, String id) {
-        if(sid.updateSensorValue(value,id) > 0)
-            return  true;
+        if (sid.updateSensorValue(value, id) > 0)
+            return true;
         return false;
+    }
+
+    @Override
+    public String findSensorByDeviceOnAndroid(String did) {
+        List<sensorinfo> slist = sid.findSensorByDevice(did);
+        JSONArray js = new JSONArray();
+        for (sensorinfo s : slist) {
+            JSONObject jsen = JSONObject.fromObject(s);//传感器的ｊｓｏｎ数据
+            List<sensorfuncinfo> sfList = sfid.selFuncBySid(s.getSei_id());
+            JSONArray j = new JSONArray();
+            for (sensorfuncinfo f : sfList) {
+                JSONObject func = JSONObject.fromObject(f);
+                func.remove("sei_id");
+                func.remove("sf_seq");
+                func.remove("sfi_seq");
+                j.add(func);
+            }
+            jsen.put("funcs", j);
+            js.add(jsen);
+        }
+
+        return js.toString();
+    }
+
+    /**
+     * @param id
+     * @author 　xuyongzhe
+     * @brief 通过传感器ｉｄ查询设备功能
+     **/
+    @Override
+    public String findSensorBySidAndFunc(String id) {
+
+
+        sensorinfo s = sid.findSensorById(id);
+        JSONObject js = JSONObject.fromObject(s);
+        if (s != null) {
+            JSONArray j = new JSONArray();
+            List<sensorfuncinfo> sfList = sfid.seleFuncs(s.getSti_id());
+
+            for (sensorfuncinfo sf : sfList) {
+                JSONObject jsonObject = JSONObject.fromObject(sf);
+                jsonObject.remove("sei_id");
+                jsonObject.remove("sf_seq");
+                jsonObject.remove("sfi_seq");
+                j.add(jsonObject);
+            }
+            js.put("funcs", j.toString());
+
+        }
+        return js.toString();
     }
 }

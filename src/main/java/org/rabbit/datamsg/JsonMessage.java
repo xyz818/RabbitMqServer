@@ -8,12 +8,13 @@ public class JsonMessage {
     * json数据转javabean对象
     * */
     public static JsonModel JsonToModel(String json) {
-        JsonModel jsonModel = new JsonModel();
+        JsonModel jsonModel = null;
         try {
 
             JSONObject js = JSONObject.fromObject(json);
             if(js.has("deviceId") && js.has("sensorId") && js.has("key"))
             {
+                jsonModel = new JsonModel();
                 jsonModel.setKey(js.getString("key"));
                 jsonModel.setDeviceId(js.getString("deviceId"));
                 jsonModel.setSensorId(js.getString("sensorId"));

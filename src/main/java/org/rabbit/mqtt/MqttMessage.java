@@ -33,6 +33,8 @@ public class MqttMessage {
             topicSender.send("topic.sql", message.toString());
             //发送给数据库联动处理，处理相关决策信息
             topicSender.send("topic.html", message.toString());
+
+            topicSender.send("topic.link", message.toString());
         } else if (strTopic.indexOf("/downstream") == 0) {//来自上层消息控制
         }
 

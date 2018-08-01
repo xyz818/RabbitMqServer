@@ -5,7 +5,7 @@ public interface triggerInfoServ {
     String findTriggerInfoByProject(int pid);
 
 
-
+    boolean addTrigger(String json);
     String findTriggerByLogic(String lid);
 
 

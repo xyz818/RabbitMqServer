@@ -41,4 +41,9 @@ public class funcInfoServImp implements funcInfoServ {
         }
         return row;
     }
+
+    @Override
+    public String selFuncByValue(String val) {
+        return fid.selFuncByName(val);
+    }
 }

@@ -1,5 +1,6 @@
 package org.rabbit.industry.service.imp;
 
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.rabbit.industry.dao.triggerInfoDao;
@@ -22,6 +23,15 @@ public class triggerInfoServImp implements triggerInfoServ {
             js.add(JSONObject.fromObject(t));
         }
         return js.toString();
+    }
+
+    @Override
+    public boolean addTrigger(String json) {
+        JSONObject js = JSONObject.fromObject(json);
+        triggerinfo t = (triggerinfo) JSONObject.toBean(js,triggerinfo.class);
+        if(tid.addTriggerInfo(t)> 0)
+            return true;
+        return false;
     }
 
     @Override

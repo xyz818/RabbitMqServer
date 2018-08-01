@@ -47,6 +47,15 @@ public class controllerInfoSerImp implements controllerInfoServ {
     }
 
     @Override
+    public boolean addControllerInfo(String json) {
+        JSONObject js = JSONObject.fromObject(json);
+        controllerinfo c = (controllerinfo) JSONObject.toBean(js,controllerinfo.class);
+        if(cid.addControllerInfo(c)> 0)
+            return true;
+        return false;
+    }
+
+    @Override
     public boolean updateController(String json) {
         JSONObject js = JSONObject.fromObject(json);
         controllerinfo c = (controllerinfo) JSONObject.toBean(js,controllerinfo.class);

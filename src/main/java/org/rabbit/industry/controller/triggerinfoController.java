@@ -14,6 +14,15 @@ public class triggerinfoController {
     @Autowired
     triggerInfoServ tis;
 
+    @ApiOperation(value = "添加触发器", notes = "添加触发器")
+    @RequestMapping(value = "/triggerinfo", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public boolean addTrigger(@RequestBody String json )
+    {
+        return tis.addTrigger( json);
+    }
+
+
     @ApiOperation(value = "根据项目查询触发器", notes = "根据项目查询触发器")
     @RequestMapping(value = "/{pid}/logic/triggerinfo", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
@@ -52,9 +61,9 @@ public class triggerinfoController {
 
 
     @ApiOperation(value = "修改触发器", notes = "修改触发器")
-    @RequestMapping(value = "/triggerinfo", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/triggerinfo", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "json", value = "json数据", required = true, dataType = "int")
+            @ApiImplicitParam(name = "json", value = "json数据", required = true, dataType = "String")
     })
     @ResponseBody
     public boolean updateTrigger(@RequestBody String json)

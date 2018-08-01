@@ -21,9 +21,17 @@ public interface controllerInfoDao {
      **/
     List<controllerinfo> findControllerByLogic(String id);
 
+    /**
+     * @param
+     * @author　xuyongzhe
+     * @brief 查询ｉｄ
+     **/
     controllerinfo  findControllerById(String id);
 
     int updateController(controllerinfo c);
+
+
+    int addControllerInfo(controllerinfo c);
 
     /**
      * @param  sid 触发类传感器id

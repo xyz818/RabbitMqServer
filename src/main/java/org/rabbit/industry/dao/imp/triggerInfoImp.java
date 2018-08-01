@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Repository
 public class triggerInfoImp implements triggerInfoDao {
     @Autowired
@@ -16,42 +17,51 @@ public class triggerInfoImp implements triggerInfoDao {
 
 
     @Override
+    public int addTriggerInfo(triggerinfo t) {
+        int row = 0;
+
+        try {
+            String sql = "insert into triggerinfo(li_id,tri_valuetype,tri_limit,tri_value,sei_id) values(?,?,?,?,?)";
+            row = jdbc.update(sql,new Object[]{t.getLi_id(),t.getTri_valuetype(),t.getTri_limit(),t.getTri_value(),t.getSei_id()});
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+
+        }
+        return row;
+    }
+
+    @Override
     public List<triggerinfo> findTriggerByProject(int pid) {
 
         List<triggerinfo> list = new ArrayList<>();
-        try
-        {
+        try {
             String sql = "select * from triggerinfo where ";
-            list = jdbc.query(sql,new Object[]{pid},new BeanPropertyRowMapper(triggerinfo.class));
-        }catch (Exception e)
-        {}
+            list = jdbc.query(sql, new Object[]{pid}, new BeanPropertyRowMapper(triggerinfo.class));
+        } catch (Exception e) {
+        }
         return list;
     }
 
     @Override
     public List<triggerinfo> findTriggerByLogic(String id) {
         List<triggerinfo> list = new ArrayList<>();
-        try
-        {
+        try {
             String sql = "select * from triggerinfo where li_id = ?";
-            list = jdbc.query(sql,new Object[]{id},new BeanPropertyRowMapper(triggerinfo.class));
-        }
-        catch (Exception e)
-        {
+            list = jdbc.query(sql, new Object[]{id}, new BeanPropertyRowMapper(triggerinfo.class));
+        } catch (Exception e) {
         }
         return list;
     }
 
     @Override
     public triggerinfo findTriggerById(int id) {
-        try
-        {
+        try {
             String sql = "select * from triggerinfo where tri_seq = ?";
-            return (triggerinfo) jdbc.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper(triggerinfo.class));
+            return (triggerinfo) jdbc.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper(triggerinfo.class));
 
+        } catch (Exception e) {
         }
-        catch (Exception e)
-        {}
 
         return null;
     }
@@ -59,28 +69,24 @@ public class triggerInfoImp implements triggerInfoDao {
     @Override
     public int updateTrigger(triggerinfo t) {
         int row = 0;
-        try
-        {
-          String sql = "update triggerinfo set ";
-          row = jdbc.update(sql,new Object[]{});
+        try {
+            String sql = "update triggerinfo set ";
+            row = jdbc.update(sql, new Object[]{});
 
+        } catch (Exception e) {
         }
-        catch (Exception e)
-        {}
 
         return row;
     }
 
     @Override
     public triggerinfo findTriggerBySid(String sid) {
-        try
-        {
+        try {
             String sql = "select * from triggerinfo where sei_id = ?";
-            return (triggerinfo) jdbc.queryForObject(sql,new Object[]{sid},new BeanPropertyRowMapper(triggerinfo.class));
+            return (triggerinfo) jdbc.queryForObject(sql, new Object[]{sid}, new BeanPropertyRowMapper(triggerinfo.class));
 
+        } catch (Exception e) {
         }
-        catch (Exception e)
-        {}
 
         return null;
     }

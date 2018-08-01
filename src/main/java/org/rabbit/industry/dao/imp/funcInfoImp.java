@@ -43,4 +43,19 @@ public class funcInfoImp implements funcInfoDao {
         }
         return row;
     }
+
+    /**
+     * @param value@author 　xuyongzhe
+     * @brief 根据名称查询ｉｄ
+     **/
+    @Override
+    public String selFuncByName(String value) {
+       String id = "";
+       try{
+            String sql = "select fui_id from funcinfo where fui_name = ?";
+            id = jdbc.queryForObject(sql,String.class,new Object[]{value});
+       }catch (Exception e)
+       {}
+       return id;
+    }
 }

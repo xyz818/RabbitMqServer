@@ -16,7 +16,7 @@ public interface controllerInfoServ {
     String findControllerById(String id);
 
 
-
+    boolean addControllerInfo(String json);
 
     boolean updateController(String json);
 

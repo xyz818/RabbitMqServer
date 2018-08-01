@@ -35,6 +35,16 @@ public class logicinfo {
 
     private int pi_seq;
 
+    public String getPi_name() {
+        return pi_name;
+    }
+
+    public void setPi_name(String pi_name) {
+        this.pi_name = pi_name;
+    }
+
+    private String pi_name;
+
     public int getPi_seq() {
         return pi_seq;
     }

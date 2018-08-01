@@ -31,7 +31,7 @@ public class logicInfoController {
             @ApiImplicitParam(name = "lid", value = "逻辑id", required = true, dataType = "String",paramType = "path")
     })
     @ResponseBody
-    public String findLogicById(String id) {
+    public String findLogicById(@PathVariable(value = "lid") String id) {
         return lis.findLogicById(id);
     }
 

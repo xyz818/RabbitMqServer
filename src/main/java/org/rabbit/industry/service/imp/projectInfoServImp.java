@@ -2,6 +2,7 @@ package org.rabbit.industry.service.imp;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.rabbit.industry.dao.logicInfoDao;
 import org.rabbit.industry.dao.projectInfoDao;
 import org.rabbit.industry.model.projectinfo;
 import org.rabbit.industry.service.projectInfoServ;
@@ -16,6 +17,9 @@ import java.util.List;
 public class projectInfoServImp implements projectInfoServ {
     @Autowired
     projectInfoDao pid;
+
+    @Autowired
+    logicInfoDao lid;
 
     @Override
     public String findProJect() {
@@ -61,8 +65,11 @@ public class projectInfoServImp implements projectInfoServ {
 
     @Override
     public boolean delProject(int p) {
-        if (pid.delProject(p) > 0)
+        if (pid.delProject(p) > 0) {
+           lid.deleteLogicByProject(p);//删除逻辑ｉｄ号
             return true;
+
+        }
         return false;
     }
 

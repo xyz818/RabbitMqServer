@@ -79,8 +79,9 @@ public class deviceInfoImp implements deviceInfoDao {
 
         int row = 0;
         try {
-            String sql = "delete  a,b,c from deviceinfo a left join devicesensor b on a.di_id = b.di_id left join " +
-                    "sensorinfo c on c.sei_id=b.sei_id where a.di_id=?";
+            String sql = "delete  a,b,c,e from deviceinfo a left join devicesensor b on a.di_id = b.di_id left join " +
+                    "sensorinfo c on c.sei_id=b.sei_id left join sensorfuncinfo e on e.sei_id = c.sei_id " +
+                    " where a.di_id=?";
             row = jdbc.update(sql, new Object[]{did});
 
         } catch (Exception e) {

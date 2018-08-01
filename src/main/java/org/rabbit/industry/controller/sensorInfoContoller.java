@@ -25,6 +25,30 @@ public class sensorInfoContoller {
     }
 
 
+    @ApiOperation(value = "根据设备号查询所有传感器", notes = "传感器列表json")
+    @RequestMapping(value = "/{devId}/sensorinfoToAndroid", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "devId", value = "设备id号", required = true, dataType = "String", paramType = "path")
+    })
+    @ResponseBody
+    public String findSensorByDeviceAndoird(@PathVariable(value = "devId") String devId) {
+        return sis.findSensorByDeviceOnAndroid(devId);
+    }
+
+
+
+    @ApiOperation(value = "根据传感器号查询所有功能", notes = "根据传感器号查询所有功能")
+    @RequestMapping(value = "/sensorinfo/{sid}/funcs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "sid", value = "传感器号", required = true, dataType = "String", paramType = "path")
+    })
+    @ResponseBody
+    public String findSensorBySidAndFunc(@PathVariable(value = "sid") String sid) {
+        return sis.findSensorBySidAndFunc(sid);
+    }
+
+
+
     @ApiOperation(value = "根据项目查询所有传感器", notes = "根据项目查询所有传感器")
     @RequestMapping(value = "/{pid}/device/sensorinfo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({

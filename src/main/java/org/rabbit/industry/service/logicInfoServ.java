@@ -41,5 +41,11 @@ public interface logicInfoServ {
      **/
     boolean deleteLogic(String id);
 
+    /**
+     * @param
+     * @author　xuyongzhe
+     * @brief 根据项目删除逻辑id号
+     **/
+    boolean deleteLogicByPid(int pid);
 
 }

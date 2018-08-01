@@ -41,7 +41,12 @@ public interface logicInfoDao {
     int deleteLogic(String id);
 
 
-
+    /**
+     * @param
+     * @author　xuyongzhe
+     * @brief 根据项目id删除逻辑
+     **/
+    int deleteLogicByProject(int pid);
 
 
 
