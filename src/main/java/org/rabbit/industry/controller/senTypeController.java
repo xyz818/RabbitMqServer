@@ -60,4 +60,15 @@ public class senTypeController {
     }
 
 
+    @ApiOperation(value = "根据传感器类型id查询", notes = "根据传感器类型id查询")
+    @RequestMapping(value = "/{id}/sentypeinfo", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "String", paramType = "path")
+    })
+    @ResponseBody
+    public String findSensorTypeById(@PathVariable(value = "id") String id) {
+        return sts.findSensorTypeById(id);
+    }
+
+
 }

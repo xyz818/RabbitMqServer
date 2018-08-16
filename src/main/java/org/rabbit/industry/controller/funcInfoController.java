@@ -32,4 +32,14 @@ public class funcInfoController {
         return fis.addFuncType(json);
     }
 
+
+    @ApiOperation(value = "根据传感器stid查询功能信息", notes = "根据传感器stid查询功能信息")
+    @RequestMapping(value = "/{stid}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "stid", value = "传感器类型id", required = true, dataType = "String",paramType = "path")
+    })
+    @ResponseBody
+    public String findFuncInfoByStid(@PathVariable(value = "stid") String stid) {
+        return fis.findFuncInfoByStid(stid);
+    }
 }

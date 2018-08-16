@@ -16,20 +16,13 @@ public class senFuncServImp implements senFuncServ {
     senFuncDao sfd;
 
     @Override
-    public int addSFtype(String json) {
+    public boolean addSFtype(String json) {
 
-        int row = 0;
-        try {
-            JSONObject j = JSONObject.fromObject(json);
-            if (j.has("sti_id") && j.has("fui_id")) { //判断是否含有该字段
-                sensorfunc sf = new sensorfunc();
-                sf.setFui_id(j.getString("fui_id"));
-                sf.setSti_id(j.getString("sti_id"));
-                row = sfd.addSFtype(sf);
-            }
-        } catch (Exception e) {
-        }
-        return row;
+        JSONObject js = JSONObject.fromObject(json);
+        sensorfunc s = (sensorfunc) JSONObject.toBean(js,sensorfunc.class);
+        if(sfd.addSFtype(s) > 0)
+            return true;
+        return false;
     }
 
     @Override

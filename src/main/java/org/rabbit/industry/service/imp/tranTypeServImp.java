@@ -46,4 +46,17 @@ public class tranTypeServImp implements tranTypeServ {
 
         return row;
     }
+
+    @Override
+    public String findTranTypeByStid(String stid) {
+        JSONArray js = new JSONArray();
+        List<tranTypeInfo> list = ttd.findTranTypeByStid(stid);
+        for(tranTypeInfo t: list)
+        {
+            js.add(JSONObject.fromObject(t));
+
+        }
+
+        return js.toString();
+    }
 }

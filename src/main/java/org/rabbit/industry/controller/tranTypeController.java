@@ -38,4 +38,21 @@ public class tranTypeController {
     }
 
 
+
+
+    @ApiOperation(value = "根据传感器类型查询传输类型", notes = "根据传感器类型查询传输类型")
+    @RequestMapping(value = "/trantypeinfo/{stid}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "stid", value = "传感器传输类型", required = true, dataType = "String",paramType = "path")
+    })
+    @ResponseBody
+    public String findTranTypeByStid(@PathVariable(value = "stid") String stid)
+    {
+
+        return tts.findTranTypeByStid(stid);
+
+    }
+
+
+
 }

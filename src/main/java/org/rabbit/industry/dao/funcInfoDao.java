@@ -25,4 +25,9 @@ public interface funcInfoDao {
      * @brief  根据名称查询ｉｄ
      **/
     String  selFuncByName(String value);
+
+
+    List<funcinfo> findFuncInfoByStid(String stid);
+
+
 }

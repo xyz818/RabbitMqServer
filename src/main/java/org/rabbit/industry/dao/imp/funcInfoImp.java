@@ -9,15 +9,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Repository
 public class funcInfoImp implements funcInfoDao {
     @Autowired
     private JdbcTemplate jdbc;
 
     /**
-     *
      * 查询功能列表dao
-     * */
+     */
     @Override
     public List<funcinfo> findFuncType() {
         List<funcinfo> list = new ArrayList<>();
@@ -32,7 +32,7 @@ public class funcInfoImp implements funcInfoDao {
 
     /**
      * 添加功能列表信息
-     * */
+     */
     @Override
     public int addFuncType(funcinfo func) {
         int row = 0;
@@ -50,12 +50,25 @@ public class funcInfoImp implements funcInfoDao {
      **/
     @Override
     public String selFuncByName(String value) {
-       String id = "";
-       try{
+        String id = "";
+        try {
             String sql = "select fui_id from funcinfo where fui_name = ?";
-            id = jdbc.queryForObject(sql,String.class,new Object[]{value});
-       }catch (Exception e)
-       {}
-       return id;
+            id = jdbc.queryForObject(sql, String.class, new Object[]{value});
+        } catch (Exception e) {
+        }
+        return id;
+    }
+
+    @Override
+    public List<funcinfo> findFuncInfoByStid(String stid) {
+        List<funcinfo> list = new ArrayList<>();
+        try {
+            String sql = "select a.fui_id,a.fui_name,a.fui_param from funcinfo a inner  join " +
+                    "sensorfunc b on a.fui_id = b.fui_id where b.sti_id = ?";
+            list =  jdbc.query(sql, new Object[]{stid}, new BeanPropertyRowMapper(funcinfo.class));
+        } catch (Exception e) {
+
+        }
+        return list;
     }
 }

@@ -19,4 +19,11 @@ public interface tranTypeDao {
      * @return  数据库影响的行数
      * */
     int addTranType(tranTypeInfo t);
+
+    /**
+     * @param
+     * @author　xuyongzhe
+     * @brief 根据传感器类型id查询传输类型
+     **/
+    List<tranTypeInfo> findTranTypeByStid(String stid);
 }

@@ -19,7 +19,7 @@ public class senFuncController {
             @ApiImplicitParam(name = "json", value = "数据json", required = true, dataType = "String")
     })
     @ResponseBody
-    public int addSFtype(@RequestBody String json)
+    public boolean addSFtype(@RequestBody String json)
     {
         return sfs.addSFtype(json);
     }

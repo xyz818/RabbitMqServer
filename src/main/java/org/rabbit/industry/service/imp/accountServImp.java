@@ -107,4 +107,36 @@ public class accountServImp implements accountServ {
             return true;
         return false;
     }
+
+    /**
+     * @param role@author 　xuyongzhe
+     * @brief 根据权限查询
+     **/
+    @Override
+    public String findAccountByRole(int role) {
+        JSONArray js = new JSONArray();
+        List<accountinfo> list = ad.findAccountByRole(role);
+        for(accountinfo a : list)
+        {
+            js.add(JSONObject.fromObject(a));
+        }
+        return js.toString();
+    }
+
+    /**
+     * @param scid
+     * @param role
+     * @author　xuyongzhe
+     * @brief 根据权限查询
+     **/
+    @Override
+    public String findAccountByScAndRole(String scid, int role) {
+        JSONArray js = new JSONArray();
+        List<accountinfo> list = ad.findAccountByScAndRole(scid,role);
+        for(accountinfo a : list)
+        {
+            js.add(JSONObject.fromObject(a));
+        }
+        return js.toString();
+    }
 }

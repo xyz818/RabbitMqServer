@@ -75,4 +75,10 @@ public class sensorTypeServImp implements sensorTypeServ {
         return formatToJSON(list);
     }
 
+    @Override
+    public String findSensorTypeById(String id) {
+        sensorTypeInfo s = std.findSensorTypeById(id);
+        return JSONObject.fromObject(s).toString();
+    }
+
 }

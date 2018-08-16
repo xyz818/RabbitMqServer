@@ -19,8 +19,8 @@ public class senFuncImp implements senFuncDao {
     public int addSFtype(sensorfunc s) {
         int row = 0;
         try {
-            String sql = "insert into sensorfunc(sti_id,fui_id) values(?,?)";
-            row = jdbc.update(sql, new Object[]{s.getSti_id(), s.getFui_id()});
+            String sql = "insert into sensorfunc(sti_id,fui_id,sf_imgurl) values(?,?,?)";
+            row = jdbc.update(sql, new Object[]{s.getSti_id(), s.getFui_id(),s.getSf_imgurl()});
 
         } catch (Exception e) {
 

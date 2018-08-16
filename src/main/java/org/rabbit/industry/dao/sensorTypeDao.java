@@ -27,4 +27,7 @@ public interface sensorTypeDao {
 
      List<sensorTypeInfo> selSenTypeByTid(String tid,int control);
 
+
+     sensorTypeInfo findSensorTypeById(String id);
+
 }

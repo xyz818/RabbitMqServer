@@ -18,4 +18,8 @@ public interface senFuncInfoDao {
 
     sensorfuncinfo selFuncCode(String sid,String fid,String stid);
 
+
+    int selCount(sensorfuncinfo s);
+
+
 }

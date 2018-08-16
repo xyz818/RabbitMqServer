@@ -46,4 +46,15 @@ public class funcInfoServImp implements funcInfoServ {
     public String selFuncByValue(String val) {
         return fid.selFuncByName(val);
     }
+
+    @Override
+    public String findFuncInfoByStid(String stid) {
+        JSONArray js = new JSONArray();
+        List<funcinfo> list = fid.findFuncInfoByStid(stid);
+        for(funcinfo f : list)
+        {
+            js.add(JSONObject.fromObject(f));
+        }
+        return js.toString();
+    }
 }

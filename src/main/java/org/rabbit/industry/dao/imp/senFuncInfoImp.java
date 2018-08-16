@@ -19,8 +19,9 @@ public class senFuncInfoImp implements senFuncInfoDao {
     public int addSensFuncInfo(sensorfuncinfo s) {
         int row = 0;
         try {
-            String sql = "insert into sensorfuncinfo(sei_id,sf_seq,sfi_code) values(?,?,?)";
-            row = jdbc.update(sql, new Object[]{s.getSei_id(), s.getSf_seq(), s.getSfi_code()});
+            String sql = "insert into sensorfuncinfo(sei_id,sf_seq,sfi_code) select a.sei_id ,b.sf_seq,? from " +
+                    "sensorinfo a left join sensorfunc b on a.sti_id=b.sti_id where a.sei_id=? and b.fui_id=?";
+            row = jdbc.update(sql, new Object[]{s.getSfi_code(), s.getSei_id(), s.getFui_id()});
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -28,12 +29,30 @@ public class senFuncInfoImp implements senFuncInfoDao {
     }
 
     @Override
+    public int selCount(sensorfuncinfo s) {
+
+        int seq = 0;
+        try {
+            String sql = "select sfi_seq from  sensorfuncinfo  where sei_id=? and sf_seq=(" +
+                    "select a.sf_seq from sensorfunc a left join sensorinfo  b on a.sti_id = b.sti_id where a.fui_id = ? and b.sei_id  = ?" +
+                    ")";
+            seq = jdbc.queryForObject(sql, Integer.class, new Object[]{s.getSei_id(), s.getFui_id(), s.getSei_id()});
+        } catch (Exception e) {
+        }
+        System.out.println("seq:" + seq);
+        return seq;
+    }
+
+
+    @Override
     public int updateSenFuncInfo(sensorfuncinfo s) {
 
         int row = 0;
         try {
-            String sql = "update sensorfuncinfo set sfi_code = ? where sei_id = ? and sf_seq = ?";
-            row = jdbc.update(sql, new Object[]{s.getSfi_code(), s.getSei_id(), s.getSf_seq()});
+            String sql = "update sensorfuncinfo set sfi_code = ? where sei_id=? and sf_seq=(" +
+                    "select a.sf_seq from  sensorfunc a left join sensorinfo  b on a.sti_id = b.sti_id where a.fui_id = ? and b.sei_id  = ?" +
+                    ")";
+            row = jdbc.update(sql, new Object[]{s.getSfi_code(), s.getSei_id(), s.getFui_id(), s.getSei_id()});
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,7 +91,7 @@ public class senFuncInfoImp implements senFuncInfoDao {
         try {
             String sql = "select  a.fui_id,c.sfi_code,b.fui_name,b.fui_param   from sensorfunc a left join funcinfo b on " +
                     "b.fui_id = a.fui_id left join sensorfuncinfo c on c.sf_seq = a.sf_seq where a.sti_id = ?";
-            list = jdbc.query(sql,new Object[]{stid},new BeanPropertyRowMapper(sensorfuncinfo.class));
+            list = jdbc.query(sql, new Object[]{stid}, new BeanPropertyRowMapper(sensorfuncinfo.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -90,4 +109,6 @@ public class senFuncInfoImp implements senFuncInfoDao {
         }
         return null;
     }
+
+
 }

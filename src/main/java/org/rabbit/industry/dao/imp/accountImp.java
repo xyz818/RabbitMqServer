@@ -91,7 +91,7 @@ public class accountImp implements accountDao {
         int row = 0;
         try {
             String sql = "insert into accountinfo(aci_id,aci_code,aci_pwd,aci_phone,aci_key,sci_id) values(?,?,?,?,?,?,?)";
-            row = jdbc.update(sql, new Object[]{a.getAci_id(), a.getAci_code(), a.getAci_pwd(), a.getAci_phone(), a.getAci_key(), a.getSci_id(),a.getAci_role()});
+            row = jdbc.update(sql, new Object[]{a.getAci_id(), a.getAci_code(), a.getAci_pwd(), a.getAci_phone(), a.getAci_key(), a.getSci_id(), a.getAci_role()});
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,5 +108,37 @@ public class accountImp implements accountDao {
             e.printStackTrace();
         }
         return row;
+    }
+
+    /**
+     * @param role@author 　xuyongzhe
+     * @brief 根据权限查询账号
+     **/
+    @Override
+    public List<accountinfo> findAccountByRole(int role) {
+        List<accountinfo> list = new ArrayList<>();
+        try {
+            String sql = "select * from accountinfo where aci_role = ?";
+            list = jdbc.query(sql, new Object[]{role}, new BeanPropertyRowMapper(accountinfo.class));
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    /**
+     * @param scid
+     * @param role
+     * @author　xuyongzhe
+     * @brief 根据学校id和权限查询账号
+     **/
+    @Override
+    public List<accountinfo> findAccountByScAndRole(String scid, int role) {
+        List<accountinfo> list = new ArrayList<>();
+        try {
+            String sql = "select * from accountinfo where sci_id = ? and aci_role = ?";
+            list = jdbc.query(sql, new Object[]{scid,role}, new BeanPropertyRowMapper(accountinfo.class));
+        } catch (Exception e) {
+        }
+        return list;
     }
 }

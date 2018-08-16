@@ -72,5 +72,19 @@ public class sensorTypeImp implements sensorTypeDao {
         return list;
     }
 
+    @Override
+    public sensorTypeInfo findSensorTypeById(String id) {
+
+        try
+        {
+            String sql = "select * from sensortypeinfo where sti_id =?";
+            return (sensorTypeInfo) jdbc.queryForObject(sql,new Object[]{id},new BeanPropertyRowMapper(sensorTypeInfo.class));
+        }
+        catch (Exception e)
+        {
+        }
+        return null;
+    }
+
 
 }

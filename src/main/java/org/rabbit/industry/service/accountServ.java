@@ -61,5 +61,19 @@ public interface accountServ {
      * */
     boolean delAccountInfo(String aid);
 
+    /**
+     * @param
+     * @author　xuyongzhe
+     * @brief 根据权限查询
+     **/
+    String findAccountByRole(int role);
+
+
+    /**
+     * @param
+     * @author　xuyongzhe
+     * @brief 根据权限查询
+     **/
+    String findAccountByScAndRole(String scid,int role);
 
 }

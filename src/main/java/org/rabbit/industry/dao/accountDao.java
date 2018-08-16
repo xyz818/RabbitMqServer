@@ -61,4 +61,18 @@ public interface accountDao {
       * */
      int delAccountInfo(String aid);
 
+    /**
+     * @param
+     * @author　xuyongzhe
+     * @brief 根据权限查询账号
+     **/
+     List<accountinfo> findAccountByRole(int role);
+
+    /**
+     * @param
+     * @author　xuyongzhe
+     * @brief 根据学校id和权限查询账号
+     **/
+     List<accountinfo> findAccountByScAndRole(String scid,int role);
+
 }

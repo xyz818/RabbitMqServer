@@ -92,4 +92,47 @@ public class accountController {
     }
 
 
+    @ApiOperation(value = "根据权限查询用户信息", notes = "根据权限查询用户信息")
+    @RequestMapping(value = "/accountinfo/{role}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "role", value = "权限", required = true, dataType = "int",paramType = "path")
+    })
+    @ResponseBody
+    public String findAccoutnByRole(@PathVariable(value = "role") int role)
+    {
+
+        return asi.findAccountByRole(role);
+
+    }
+
+
+    @ApiOperation(value = "根据账户id删除", notes = "根据账户id删除")
+    @RequestMapping(value = "/accountinfo/{aid}", method = RequestMethod.DELETE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "aid", value = "账户id", required = true, dataType = "String", paramType = "path")
+    })
+    @ResponseBody
+    public boolean delAccountById(@PathVariable(value = "aid") String aid) {
+        return asi.delAccountInfo(aid);
+    }
+
+
+
+
+
+    @ApiOperation(value = "根据权限查询用户信息", notes = "根据权限查询用户信息")
+    @RequestMapping(value = "/{scid}/accountinfo/{role}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "scid", value = "学校id", required = true, dataType = "String",paramType = "path"),
+            @ApiImplicitParam(name = "role", value = "权限", required = true, dataType = "int",paramType = "path")
+    })
+    @ResponseBody
+    public String findAccoutnByScAndRole(@PathVariable(value = "scid") String scid,@PathVariable(value = "role") int role)
+    {
+
+        return asi.findAccountByScAndRole(scid,role);
+
+    }
+
+
 }
