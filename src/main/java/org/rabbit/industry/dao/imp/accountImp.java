@@ -54,7 +54,8 @@ public class accountImp implements accountDao {
     public List<accountinfo> findAccount() {
         List<accountinfo> list = new ArrayList<>();
         try {
-            String sql = "select * from accountinfo";
+            String sql = "select a.aci_id,a.aci_code,a.aci_pwd,a.aci_phone,a.aci_key,a.aci_role,a.sci_id,b.sci_name " +
+                    " from accountinfo a inner join schoolinfo b on a.sci_id = b.sci_id ";
             list = jdbc.query(sql, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +67,8 @@ public class accountImp implements accountDao {
     public List<accountinfo> findAccount(String sid) {
         List<accountinfo> list = new ArrayList<>();
         try {
-            String sql = "select * from accountinfo where sci_id = ?";
+            String sql = "select a.aci_id,a.aci_code,a.aci_pwd,a.aci_phone,a.aci_key,a.aci_role,a.sci_id,b.sci_name " +
+                    "from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where sci_id = ?";
             list = jdbc.query(sql, new Object[]{sid}, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,7 +80,8 @@ public class accountImp implements accountDao {
     public accountinfo findAccountByAid(String aid) {
         try {
             //根据id号查询信息
-            String sql = "select * from accountinfo where aci_id = ?";
+            String sql = "select a.aci_id,a.aci_code,a.aci_pwd,a.aci_phone,a.aci_key,a.aci_role,a.sci_id,b.sci_name" +
+                    " from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where aci_id = ?";
             return (accountinfo) jdbc.queryForObject(sql, new Object[]{aid}, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +121,8 @@ public class accountImp implements accountDao {
     public List<accountinfo> findAccountByRole(int role) {
         List<accountinfo> list = new ArrayList<>();
         try {
-            String sql = "select * from accountinfo where aci_role = ?";
+            String sql = "select a.aci_id,a.aci_code,a.aci_pwd,a.aci_phone,a.aci_key,a.aci_role,a.sci_id,b.sci_name " +
+                    " from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where aci_role = ?";
             list = jdbc.query(sql, new Object[]{role}, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
         }
@@ -135,7 +139,8 @@ public class accountImp implements accountDao {
     public List<accountinfo> findAccountByScAndRole(String scid, int role) {
         List<accountinfo> list = new ArrayList<>();
         try {
-            String sql = "select * from accountinfo where sci_id = ? and aci_role = ?";
+            String sql = "select a.aci_id,a.aci_code,a.aci_pwd,a.aci_phone,a.aci_key,a.aci_role,a.sci_id,b.sci_name "  +
+                   " from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where sci_id = ? and aci_role = ?";
             list = jdbc.query(sql, new Object[]{scid,role}, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
         }

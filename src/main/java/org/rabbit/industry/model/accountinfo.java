@@ -79,4 +79,14 @@ public class accountinfo {
     private short aci_role;
     private String sci_id;//学校id号
 
+    public String getSci_name() {
+        return sci_name;
+    }
+
+    public void setSci_name(String sci_name) {
+        this.sci_name = sci_name;
+    }
+
+    private String sci_name; // 学校名称
+
 }

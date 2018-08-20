@@ -3,8 +3,12 @@ package org.rabbit.industry.dao.imp;
 import org.rabbit.industry.dao.historyDao;
 import org.rabbit.industry.model.historyrecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class historyImp implements historyDao {
@@ -24,5 +28,22 @@ public class historyImp implements historyDao {
 
         }
         return row;
+    }
+
+    @Override
+    public List<historyrecord> findHistroyInfo(int pid, String seid, String startTime, String endTime) {
+        List<historyrecord> list = new ArrayList<>();
+        try
+        {
+            String sql = "select * from historyrecord where hr_time between ? and ? and sei_id = ? and pi_seq = ? " +
+                    "order by hr_seq desc limit 100";
+            list = jdbc.query(sql,new Object[]{startTime,endTime,seid,pid},new BeanPropertyRowMapper(historyrecord.class));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 }

@@ -59,8 +59,8 @@ public class schoolInfoImp implements schoolInfoDao {
     public List<schoolinfo> findSchool() {
         List<schoolinfo> list = new ArrayList<>();
         try {
-            String sql = "select * from schoolinfo where ";
-            jdbc.query(sql, new BeanPropertyRowMapper(schoolinfo.class));
+            String sql = "select * from schoolinfo";
+            list  = jdbc.query(sql, new BeanPropertyRowMapper(schoolinfo.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
