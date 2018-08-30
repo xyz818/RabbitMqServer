@@ -41,7 +41,7 @@ public class historyImp implements historyDao {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
         return list;

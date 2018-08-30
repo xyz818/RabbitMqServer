@@ -30,17 +30,17 @@ public class ClientControlRest {
     })
     @ResponseBody
     public boolean cmdSend(@RequestBody  String json) {
-        System.out.println("开始发送");
+//        System.out.println("开始发送");
 //        topicSender.send("topic.sql","nihao");
 //        MqttServerContext.getGateWay().sendToMqtt("nihao rabbit mq","/downstream/hello");
         try {
-            System.out.println(json);
+//            System.out.println(json);
             JSONObject js = JSONObject.fromObject(json);
             if (js.has("connecttype")) {
                 if (js.getString("connecttype").equals("MQTT")) {   //如果链接方式为ｍｑｔｔ方式,采用一下发送方式
-                    System.out.println("connecttype");
+//                    System.out.println("connecttype");
                     if (js.has("deviceId")) {
-                        System.out.println("deviceId");
+//                        System.out.println("deviceId");
                         mqttMessage.sendMsg("/downstream/" + js.getString("deviceId"), json);
                         return true;
                     }

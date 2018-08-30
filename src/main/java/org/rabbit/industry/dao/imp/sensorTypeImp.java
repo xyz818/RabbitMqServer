@@ -32,7 +32,7 @@ public class sensorTypeImp implements sensorTypeDao {
 
             System.out.println(ss.getSti_id()+",,,,,,,");
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return list;
     }
@@ -47,7 +47,7 @@ public class sensorTypeImp implements sensorTypeDao {
             list = jdbc.query("select * from sensortypeinfo where sti_control=?",new Object[]{ (short)control},new BeanPropertyRowMapper(sensorTypeInfo.class));
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return list;
     }

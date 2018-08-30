@@ -53,7 +53,7 @@ public class sensorFuncInfoController {
 
 
     @ApiOperation(value = "查询功能码", notes = "查询功能码")
-    @RequestMapping(value = "/sensorfuncinfo/code", method = RequestMethod.GET,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sensorfuncinfo/code", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "json", value = "数据json", required = true, dataType = "String")
     })

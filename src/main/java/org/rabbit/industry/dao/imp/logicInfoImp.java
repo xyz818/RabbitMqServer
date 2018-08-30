@@ -25,7 +25,7 @@ public class logicInfoImp implements logicInfoDao {
                     "inner  join  projectinfo b on a.pi_seq = b.pi_seq where a.pi_seq = ? ";
             list = jdbc.query(sql, new Object[]{pid}, new BeanPropertyRowMapper(logicinfo.class));
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return list;
     }
@@ -87,7 +87,7 @@ public class logicInfoImp implements logicInfoDao {
                     "controllerinfo c on a.li_id = b.li_id where a.pi_seq = ?";
             row = jdbc.update(sql, new Object[]{pid});
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return row;
     }

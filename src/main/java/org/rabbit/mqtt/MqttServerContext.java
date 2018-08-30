@@ -12,7 +12,7 @@ public class MqttServerContext implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         if (MqttServerContext.applicationContext == null) {
-            System.out.println("mqttserverContext");
+//            System.out.println("mqttserverContext");
             MqttServerContext.applicationContext = applicationContext;
 
         }
@@ -21,7 +21,7 @@ public class MqttServerContext implements ApplicationContextAware {
     public static MyGateWay getGateWay() {
         if (applicationContext != null)
             return applicationContext.getBean(MyGateWay.class);
-        System.out.println("mqttserverContext is null");
+//        System.out.println("mqttserverContext is null");
         return null;
     }
 }

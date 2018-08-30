@@ -46,7 +46,7 @@ public class HistoryServImp implements historyServ {
                 js.add(JSONObject.fromObject(h));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return js.toString();
     }

@@ -24,7 +24,6 @@ public class schoolController {
     @RequestMapping(value = "/schoolinfo", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public String findSchool() {
         return sis.findSchool();
-
     }
     @ApiOperation(value = "根据id查询学校", notes = "根据id查询学校")
     @RequestMapping(value = "/schoolinfo/{id}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)

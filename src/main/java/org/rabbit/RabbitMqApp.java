@@ -153,7 +153,7 @@ public class RabbitMqApp extends SpringBootServletInitializer {
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
         MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(new String[] { "tcp://139.196.218.156:1883" });
+        options.setServerURIs(new String[] { "tcp://127.0.0.1:1883" });
 //        options.setUserName("username");
 //        options.setPassword("password".toCharArray());
         options.setAutomaticReconnect(true); //自动重新链接
@@ -167,7 +167,7 @@ public class RabbitMqApp extends SpringBootServletInitializer {
     @ServiceActivator(inputChannel = "mqttOutboundChannel")
     public MessageHandler mqttOutbound() {
         MqttPahoMessageHandler messageHandler =
-                new MqttPahoMessageHandler("RbMqOutTest", mqttClientFactory());
+                new MqttPahoMessageHandler("RbMqOutTestqq", mqttClientFactory());
         messageHandler.setAsync(true);
         messageHandler.setDefaultQos(1);
 //        messageHandler.setDefaultTopic("testTopic");
@@ -192,7 +192,7 @@ public class RabbitMqApp extends SpringBootServletInitializer {
     @Bean
     public MessageProducer inbound() {
         MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter("RbMqInTest",mqttClientFactory());
+                new MqttPahoMessageDrivenChannelAdapter("RbMqInTestqq",mqttClientFactory());
 
         adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());

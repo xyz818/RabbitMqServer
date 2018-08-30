@@ -23,11 +23,15 @@ public class deviceInfoServImp implements deviceInfoServ {
         JSONArray js = new JSONArray();
         try
         {
+//            System.out.println("项目id:"+pid);
             List<deviceinfo>  list = dvi.findDeivceByProject(pid);
-            for(deviceinfo d : list)
+            for(deviceinfo d : list) {
                 js.add(JSONObject.fromObject(d));
+            }
         }catch (Exception e)
-        {}
+        {
+//            e.printStackTrace();
+        }
         return js.toString();
     }
 

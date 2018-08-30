@@ -51,9 +51,10 @@ public class senorFuncInfoServImp implements sensorFuncInfoServ {
     @Override
     public String selectFuncCode(String sid, String stid, String fuid) {
         sensorfuncinfo s = sfid.selFuncCode(sid, stid, fuid);
+        JSONObject j = new JSONObject();
         if (s != null)
-            return s.getSfi_code();
-        return "";
+            j.put("sfi_code",s.getSfi_code());
+        return j.toString();
     }
 
     @Override

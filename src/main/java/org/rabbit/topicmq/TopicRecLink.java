@@ -36,26 +36,26 @@ public class TopicRecLink {
     @RabbitHandler
     public void process(String msg) {
         try {
-            System.out.println("处理联动数据中----------------------------------------");
+//            System.out.println("处理联动数据中----------------------------------------");
             JsonModel jm = JsonMessage.JsonToModel(msg);//json格式信息转换
             if (jm != null) {//判断数据是否完整，不完整不进行
 //        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//时间格式信息
                 String sensorId = jm.getSensorId();  //采集类传感器
                 String deviceId = jm.getDeviceId();
                 String cjson = cis.findControllerByTrigId(sensorId); //获取执行传感器
-                System.out.println("cjson:" + cjson);
+//                System.out.println("cjson:" + cjson);
                 if (!cjson.equals("null")) {
-                    System.out.println("json部位空,进入后台开始");
+//                    System.out.println("json部位空,进入后台开始");
                     JSONObject cjs = JSONObject.fromObject(cjson);
                     jm.setSensorId(cjs.getString("sei_id"));
                     String sensor = sis.findSensorById(cjs.getString("sei_id"));
                     JSONObject sjs = JSONObject.fromObject(sensor);
                     //判断当前逻辑是否开启
                     if (cjs.getInt("li_status") == 1) {
-                        System.out.println("状态为1进入");
+//                        System.out.println("状态为1进入");
                         //判断当前传感器的状态是否和数据库中要控制的状态一致,如果一致,不需要发送命令,不一致,发送命令
                         if (!sjs.getString("sei_value").equals(cjs.getString("coi_value"))) {
-                            System.out.println("当前的状态不一致");
+//                            System.out.println("当前的状态不一致");
                             String tjson = tis.findTriggerBySid(sensorId);
                             JSONObject tjs = JSONObject.fromObject(tjson);
                             boolean isOK = false;
@@ -78,21 +78,24 @@ public class TopicRecLink {
                                         break;
                                 }
                                 if (isOK) {//条件是否达成
-                                    System.out.println("条件达成发送控制");
+//                                    System.out.println("条件达成发送控制");
                                     JSONObject data = new JSONObject();
                                     String fuid = fis.selFuncByValue(cjs.getString("coi_value"));//查询功能号
                                     //根据传感器的标识码和类型和功能码来查询是否含有功能码
                                     String fcode = sfis.selectFuncCode(jm.getSensorId(), sjs.getString("sti_id"), fuid);
                                     data.put("func", fuid);//控制执行值
-                                    if (!fcode.equals(""))//判断码是否为空，若为空，则不进行添加
-                                        data.put("funcCode", fcode);
+                                    if (!fcode.equals("") && !fcode.equals("{}"))//判断码是否为空，若为空，则不进行添加
+                                    {
+                                        JSONObject jfcode = JSONObject.fromObject(fcode);
+                                        data.put("funcCode", jfcode.getString("sfi_code"));
+                                    }
                                     jm.setData(data);
                                     String strSensor = sis.findSensorById(jm.getSensorId());   //获取传感器的类
                                     JSONObject sjon = JSONObject.fromObject(strSensor);   //传感器的json包
                                     jm.setCode(sjon.getString("sei_mac"));   //控制器的code码
                                     jm.setTrantype(sjon.getString("tti_id")); //传输类型id
                                     if (jm.getConnecttype().equals("MQTT")) {
-                                        System.out.println("MQTT发送给设备端:" + deviceId);
+//                                        System.out.println("MQTT发送给设备端:" + deviceId);
                                         mqttMessage.sendMsg("/downstream/" + deviceId, JSONObject.fromObject(jm).toString());
                                     }
                                 }
@@ -101,8 +104,8 @@ public class TopicRecLink {
                     }
                 }
 
-                System.out.println("topic.link  : " + "处理联动信息结束----------------------------");
-                System.out.println("\n");
+//                System.out.println("topic.link  : " + "处理联动信息结束----------------------------");
+//                System.out.println("\n");
             }
         } catch (Exception e) {
 

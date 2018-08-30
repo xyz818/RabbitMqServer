@@ -20,12 +20,15 @@ public class triggerInfoImp implements triggerInfoDao {
     public int addTriggerInfo(triggerinfo t) {
         int row = 0;
 
-        try {
-            String sql = "insert into triggerinfo(li_id,tri_valuetype,tri_limit,tri_value,sei_id) values(?,?,?,?,?)";
-            row = jdbc.update(sql,new Object[]{t.getLi_id(),t.getTri_valuetype(),t.getTri_limit(),t.getTri_value(),t.getSei_id()});
+        try{
+            //8-30 触发源问题,去重复
+            if(selectTriggerCountBySeid(t.getSei_id()) <=0) {
+                String sql = "insert into triggerinfo(li_id,tri_valuetype,tri_limit,tri_value,sei_id) values(?,?,?,?,?)";
+                row = jdbc.update(sql, new Object[]{t.getLi_id(), t.getTri_valuetype(), t.getTri_limit(), t.getTri_value(), t.getSei_id()});
+            }
         } catch (Exception e)
         {
-            e.printStackTrace();
+//            e.printStackTrace();
 
         }
         return row;
@@ -89,5 +92,17 @@ public class triggerInfoImp implements triggerInfoDao {
         }
 
         return null;
+    }
+
+    @Override
+    public int selectTriggerCountBySeid(String sid) {
+        int row = 0;
+        try
+        {
+            String sql = "select count(*) from triggerinfo where sei_id = ?";
+            row = jdbc.queryForObject(sql,Integer.class,new Object[]{sid});
+        }
+        catch (Exception e){}
+        return row;
     }
 }

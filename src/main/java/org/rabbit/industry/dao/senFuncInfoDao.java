@@ -14,9 +14,9 @@ public interface senFuncInfoDao {
     List<sensorfuncinfo> selFuncBySid(String sid);
 
 
-    List<sensorfuncinfo> seleFuncs(String stid);
+    List<sensorfuncinfo> seleFuncs(String seid);
 
-    sensorfuncinfo selFuncCode(String sid,String fid,String stid);
+    sensorfuncinfo selFuncCode(String sid,String stid,String fid);
 
 
     int selCount(sensorfuncinfo s);

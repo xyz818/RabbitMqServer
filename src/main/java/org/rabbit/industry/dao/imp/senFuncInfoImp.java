@@ -23,7 +23,7 @@ public class senFuncInfoImp implements senFuncInfoDao {
                     "sensorinfo a left join sensorfunc b on a.sti_id=b.sti_id where a.sei_id=? and b.fui_id=?";
             row = jdbc.update(sql, new Object[]{s.getSfi_code(), s.getSei_id(), s.getFui_id()});
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return row;
     }
@@ -39,14 +39,13 @@ public class senFuncInfoImp implements senFuncInfoDao {
             seq = jdbc.queryForObject(sql, Integer.class, new Object[]{s.getSei_id(), s.getFui_id(), s.getSei_id()});
         } catch (Exception e) {
         }
-        System.out.println("seq:" + seq);
+//        System.out.println("seq:" + seq);
         return seq;
     }
 
 
     @Override
     public int updateSenFuncInfo(sensorfuncinfo s) {
-
         int row = 0;
         try {
             String sql = "update sensorfuncinfo set sfi_code = ? where sei_id=? and sf_seq=(" +
@@ -54,7 +53,7 @@ public class senFuncInfoImp implements senFuncInfoDao {
                     ")";
             row = jdbc.update(sql, new Object[]{s.getSfi_code(), s.getSei_id(), s.getFui_id(), s.getSei_id()});
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return row;
     }
@@ -66,7 +65,6 @@ public class senFuncInfoImp implements senFuncInfoDao {
             String sql = "delete from sensorfuncinfo where sfi_seq = ?";
             row = jdbc.update(sql, new Object[]{s.getSfi_seq()});
         } catch (Exception e) {
-
         }
         return row;
     }
@@ -80,32 +78,33 @@ public class senFuncInfoImp implements senFuncInfoDao {
                     "inner join funcinfo c on c.fui_id = b.fui_id where a.sei_id = ?";
             list = jdbc.query(sql, new Object[]{sid}, new BeanPropertyRowMapper(sensorfuncinfo.class));
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return list;
     }
 
     @Override
-    public List<sensorfuncinfo> seleFuncs(String stid) {
+    public List<sensorfuncinfo> seleFuncs(String seid) {
         List<sensorfuncinfo> list = new ArrayList<>();
         try {
-            String sql = "select  a.fui_id,c.sfi_code,b.fui_name,b.fui_param   from sensorfunc a left join funcinfo b on " +
-                    "b.fui_id = a.fui_id left join sensorfuncinfo c on c.sf_seq = a.sf_seq where a.sti_id = ?";
-            list = jdbc.query(sql, new Object[]{stid}, new BeanPropertyRowMapper(sensorfuncinfo.class));
+            String sql = "select  a.fui_id,c.sfi_code,b.fui_name,b.fui_param from sensorinfo s left join sensorfunc a on s.sti_id = a.sti_id" +
+                    " left join funcinfo b on " +
+                    "b.fui_id = a.fui_id left join sensorfuncinfo c on c.sf_seq = a.sf_seq and c.sei_id = s.sei_id where s.sei_id =?";
+            list = jdbc.query(sql, new Object[]{seid}, new BeanPropertyRowMapper(sensorfuncinfo.class));
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return list;
     }
 
     @Override
-    public sensorfuncinfo selFuncCode(String sid, String fid, String stid) {
+    public sensorfuncinfo selFuncCode(String sid, String stid, String fid) {
         try {
             String sql = "select a.sfi_seq,a.sfi_code from sensorfuncinfo a inner join sensorfunc b on a.sf_seq = b.sf_seq where " +
-                    "a.sei_id =? and b.sti_id=? and fui_id = ?";
+                    "a.sei_id =? and b.sti_id=? and b.fui_id = ?";
             return (sensorfuncinfo) jdbc.queryForObject(sql, new Object[]{sid, stid, fid}, new BeanPropertyRowMapper(sensorfuncinfo.class));
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return null;
     }

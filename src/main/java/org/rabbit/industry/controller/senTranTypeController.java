@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/senortrantype")
+@RequestMapping(value = "/sensortrantype")
 public class senTranTypeController  {
 
 
@@ -22,7 +22,7 @@ public class senTranTypeController  {
             @ApiImplicitParam(name = "json", value = "数据json", required = true, dataType = "String")
     })
     @ResponseBody
-    public int addSTtype(@RequestBody String json)
+    public boolean addSTtype(@RequestBody String json)
     {
         return stts.addSTtype(json);
     }

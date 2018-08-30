@@ -51,7 +51,7 @@ public class devSenImp implements devSenDao {
             row = jdbc.queryForObject(sql,Integer.class,new Object[]{did,sId});
         }catch (Exception e)
         {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return row;
     }

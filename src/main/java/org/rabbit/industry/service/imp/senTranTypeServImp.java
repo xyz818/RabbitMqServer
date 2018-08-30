@@ -13,19 +13,17 @@ public class senTranTypeServImp implements senTranTypeServ {
     senTranTypeDao sttd;
 
     @Override
-    public int addSTtype(String json) {
-        int row = 0;
+    public boolean addSTtype(String json) {
         try {
             JSONObject j = JSONObject.fromObject(json);
-
-            if (j.has("sti_id") && j.has("tti_id")) {
-                sensortrantype s = new sensortrantype();
-                s.setSti_id(j.getString("sti_id"));
-                s.setTti_id(j.getString("tti_id"));
-                row = sttd.addSTtype(s);
+            sensortrantype s = (sensortrantype) JSONObject.toBean(j, sensortrantype.class);
+            if (sttd.selSTCount(s) == 0) {
+                if (sttd.addSTtype(s) > 0)
+                    return true;
             }
         } catch (Exception e) {
+//            e.printStackTrace();
         }
-        return row;
+        return false;
     }
 }

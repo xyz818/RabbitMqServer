@@ -20,7 +20,7 @@ public class schoolInfoImp implements schoolInfoDao {
     public int addSchool(schoolinfo s) {
         int row = 0;
         try {
-            String sql = "insert into schollinfo values(sci_id,sci_name,sci_city,sci_person,sci_phone,sci_address,sci_brief,sci_param)";
+            String sql = "insert into schoolinfo values(sci_id,sci_name,sci_city,sci_person,sci_phone,sci_address,sci_brief,sci_param)";
             row = jdbc.update(sql, new Object[]{s.getSci_id(), s.getSci_name(), s.getSci_city(), s.getSci_person(), s.getSci_phone(), s.getSci_address(), s.getSci_brief()});
         } catch (Exception e) {
         }
@@ -50,7 +50,7 @@ public class schoolInfoImp implements schoolInfoDao {
             String sql = "update schoolinfo set sci_name =? where sci_id = ?";
             row = jdbc.update(sql, new Object[]{s.getSci_name(), s.getSci_id()});
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return row;
     }
@@ -62,7 +62,7 @@ public class schoolInfoImp implements schoolInfoDao {
             String sql = "select * from schoolinfo";
             list  = jdbc.query(sql, new BeanPropertyRowMapper(schoolinfo.class));
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return list;
     }
@@ -73,7 +73,7 @@ public class schoolInfoImp implements schoolInfoDao {
             String sql = "select * from schoolinfo where sci_id = ?";
             return (schoolinfo) jdbc.queryForObject(sql, new Object[]{sid}, new BeanPropertyRowMapper(schoolinfo.class));
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return null;
     }

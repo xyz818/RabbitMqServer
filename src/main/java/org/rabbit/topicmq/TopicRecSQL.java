@@ -28,7 +28,7 @@ public class TopicRecSQL {
     @RabbitHandler
     public void process(String msg) {
         try {
-            System.out.println("topic.sql: 正在写入历史数据库信息0------------------");
+//            System.out.println("topic.sql: 正在写入历史数据库信息0------------------");
             JsonModel jm = JsonMessage.JsonToModel(msg);//json格式信息转换
             if (jm != null) {
                 SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//时间格式信息
@@ -43,18 +43,18 @@ public class TopicRecSQL {
                     historyrecord hr = new historyrecord(jm.getDeviceId(), jm.getSensorId(), Timestamp.valueOf(time), jm.getData().getString("value"));
                     //保存历史记录信息
                     if (hs.saveHistory(hr)) {
-                        System.out.println("历史数据库更新成功");
-                        if (sis.updateSensorValue(jm.getData().getString("value"), jm.getSensorId()))
-                            System.out.println("传感器数据库更新成功");
+//                        System.out.println("历史数据库更新成功");
+                        sis.updateSensorValue(jm.getData().getString("value"), jm.getSensorId());
+//                            System.out.println("传感器数据库更新成功");
                     }
 //        mqttMessage.sendMsg("/downstream/hello","recive from cloud");
-                    System.out.println("结束写入数据库流程----------------------------------");
-                    System.out.println("\n");
+//                    System.out.println("结束写入数据库流程----------------------------------");
+//                    System.out.println("\n");
                 }
             }
         } catch (Exception e) {
             // e.printStackTrace();
-            System.out.println("无效的数据流");
+//            System.out.println("无效的数据流");
         }
     }
 

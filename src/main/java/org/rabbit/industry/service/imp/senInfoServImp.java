@@ -161,7 +161,7 @@ public class senInfoServImp implements senInfoServ {
         JSONObject js = JSONObject.fromObject(s);
         if (s != null) {
             JSONArray j = new JSONArray();
-            List<sensorfuncinfo> sfList = sfid.seleFuncs(s.getSti_id());
+            List<sensorfuncinfo> sfList = sfid.seleFuncs(s.getSei_id());
 
             for (sensorfuncinfo sf : sfList) {
                 JSONObject jsonObject = JSONObject.fromObject(sf);

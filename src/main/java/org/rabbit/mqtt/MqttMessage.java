@@ -25,7 +25,7 @@ public class MqttMessage {
      * */
     public void recieveMsg(Object topic, Object message) {
         String strTopic = topic.toString();
-        System.out.println(strTopic + ":" + message.toString());
+//        System.out.println(strTopic + ":" + message.toString());
 
         if (strTopic.indexOf("/upstream") == 0) //来自底层硬件的数据流上传
         {
@@ -47,11 +47,11 @@ public class MqttMessage {
      * */
     public boolean sendMsg(String topic, String message) {
         try {
-            System.out.println("消息发送");
+//            System.out.println("消息发送");
             //发送mqtt消息
             MqttServerContext.getGateWay().sendToMqtt(message, topic);
         } catch (Exception e) {
-            System.out.println("error");
+//            System.out.println("error");
             e.printStackTrace();
             return false;
         }

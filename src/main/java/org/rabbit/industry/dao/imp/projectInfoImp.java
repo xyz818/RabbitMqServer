@@ -24,7 +24,7 @@ public class projectInfoImp implements projectInfoDao {
             list = jdbc.query(sql, new BeanPropertyRowMapper(projectinfo.class));
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return list;
     }
@@ -37,7 +37,7 @@ public class projectInfoImp implements projectInfoDao {
                     "inner  join projecttypeinfo b  on a.pti_id = b.pti_id where aci_id = ?";
             list = jdbc.query(sql, new Object[]{id}, new BeanPropertyRowMapper(projectinfo.class));
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return list;
     }
@@ -49,7 +49,7 @@ public class projectInfoImp implements projectInfoDao {
             String sql = "insert into projectinfo(pti_id,pi_name,pi_time,pi_status,aci_id) values(?,?,?,?,?)";
             row = jdbc.update(sql, new Object[]{p.getPti_id(), p.getPi_name(), p.getPi_time(), p.getPi_status(), p.getAci_id()});
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
         return row;
@@ -62,7 +62,7 @@ public class projectInfoImp implements projectInfoDao {
             String sql = "update projectinfo set pti_id=?,pi_name=?,pi_time=? where pi_seq = ? ";
             row = jdbc.update(sql, new Object[]{p.getPti_id(), p.getPi_name(), p.getPi_time(),p.getPi_seq()});
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return row;
     }
@@ -79,7 +79,7 @@ public class projectInfoImp implements projectInfoDao {
                     "d.sei_id =e.sei_id left join sensorfuncinfo f on f.sei_id = e.sei_id  where a.pi_seq = ?";
             row = jdbc.update(sql, new Object[]{id});
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return row;
     }
@@ -90,7 +90,7 @@ public class projectInfoImp implements projectInfoDao {
             String sql = "select * from projectinfo where pi_seq = ?";
             return (projectinfo) jdbc.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper(projectinfo.class));
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return null;
     }

@@ -26,19 +26,24 @@ public class TopicRecToHtml {
 
     @RabbitHandler
     public void process(String msg) {
-        System.out.println("数据发送给页面--------------------------");
-        JsonModel jm = JsonMessage.JsonToModel(msg);//json格式信息转换
+        try {
+//        System.out.println("数据发送给页面--------------------------");
+            JsonModel jm = JsonMessage.JsonToModel(msg);//json格式信息转换
 //        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//时间格式信息
-        //获取设备号
-        String deviceId = jm.getDeviceId();
-        System.out.println("deviceId:"+deviceId);
-        //根据设备号查询项目名称
-        int proId = pds.selProjectIdByDeviceID(deviceId);
-        System.out.println("项目id:"+proId);
-        if (proId > 0) {
+            //获取设备号
+            String deviceId = jm.getDeviceId();
+//        System.out.println("deviceId:"+deviceId);
+            //根据设备号查询项目名称
+            int proId = pds.selProjectIdByDeviceID(deviceId);
+//        System.out.println("项目id:"+proId);
+            if (proId > 0) {
 
-            mqttMessage.sendMsg("/uptohtml/" + proId, msg);
-            System.out.println("数据发送给页面结束------------------------------");
+                mqttMessage.sendMsg("/uptohtml/" + proId, msg);
+//            System.out.println("数据发送给页面结束------------------------------");
+            }
+        }
+        catch (Exception e)
+        {
         }
     }
 

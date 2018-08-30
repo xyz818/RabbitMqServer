@@ -27,7 +27,7 @@ public class deviceInfoImp implements deviceInfoDao {
             list = jdbc.query(sql, new Object[]{pid}, new BeanPropertyRowMapper(deviceinfo.class));
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
 
@@ -41,7 +41,7 @@ public class deviceInfoImp implements deviceInfoDao {
             deviceinfo d = (deviceinfo) jdbc.queryForObject(sql, new Object[]{did}, new BeanPropertyRowMapper(deviceinfo.class));
             return d;
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return null;
     }
@@ -54,7 +54,7 @@ public class deviceInfoImp implements deviceInfoDao {
             row = jdbc.update(sql, new Object[]{d.getDi_id(), d.getDi_mac(), d.getDi_name(), d.getDi_type(), d.getDi_conttype(),
                      d.getDi_key()});
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return row;
     }
@@ -68,7 +68,7 @@ public class deviceInfoImp implements deviceInfoDao {
                     d.getDi_status(), d.getDi_id()});
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
 
         }
         return row;
@@ -85,7 +85,7 @@ public class deviceInfoImp implements deviceInfoDao {
             row = jdbc.update(sql, new Object[]{did});
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return row;
     }

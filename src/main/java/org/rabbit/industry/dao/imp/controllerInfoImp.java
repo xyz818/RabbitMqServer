@@ -73,7 +73,7 @@ public class controllerInfoImp implements controllerInfoDao {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
         return  row;
