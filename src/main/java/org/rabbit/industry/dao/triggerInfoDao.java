@@ -15,7 +15,7 @@ public interface triggerInfoDao {
 
     int updateTrigger(triggerinfo t);
 
-    triggerinfo findTriggerBySid(String sid);
+    triggerinfo findTriggerBySid(String sid,String lid);
 
-    int selectTriggerCountBySeid(String sid);
+    int selectTriggerCountBySeid(String sid,String lid);
 }

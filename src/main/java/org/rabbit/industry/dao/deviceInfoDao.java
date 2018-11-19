@@ -38,6 +38,6 @@ public interface deviceInfoDao {
      * @brief　删除设备信息
      **/
     int deleteDevice(String did);
-
+    int selCountByDeivceId(String did);
 
 }

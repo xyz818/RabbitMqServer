@@ -68,7 +68,7 @@ public class accountImp implements accountDao {
         List<accountinfo> list = new ArrayList<>();
         try {
             String sql = "select a.aci_id,a.aci_code,a.aci_pwd,a.aci_phone,a.aci_key,a.aci_role,a.sci_id,b.sci_name " +
-                    "from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where sci_id = ?";
+                    "from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where a.sci_id = ?";
             list = jdbc.query(sql, new Object[]{sid}, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
 //            e.printStackTrace();
@@ -81,7 +81,7 @@ public class accountImp implements accountDao {
         try {
             //根据id号查询信息
             String sql = "select a.aci_id,a.aci_code,a.aci_pwd,a.aci_phone,a.aci_key,a.aci_role,a.sci_id,b.sci_name" +
-                    " from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where aci_id = ?";
+                    " from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where a.aci_id = ?";
             return (accountinfo) jdbc.queryForObject(sql, new Object[]{aid}, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
 //            e.printStackTrace();
@@ -122,9 +122,10 @@ public class accountImp implements accountDao {
         List<accountinfo> list = new ArrayList<>();
         try {
             String sql = "select a.aci_id,a.aci_code,a.aci_pwd,a.aci_phone,a.aci_key,a.aci_role,a.sci_id,b.sci_name " +
-                    " from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where aci_role = ?";
+                    " from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where a.aci_role = ?";
             list = jdbc.query(sql, new Object[]{role}, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
+//            e.printStackTrace();
         }
         return list;
     }
@@ -140,9 +141,10 @@ public class accountImp implements accountDao {
         List<accountinfo> list = new ArrayList<>();
         try {
             String sql = "select a.aci_id,a.aci_code,a.aci_pwd,a.aci_phone,a.aci_key,a.aci_role,a.sci_id,b.sci_name "  +
-                   " from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where sci_id = ? and aci_role = ?";
+                   " from accountinfo a  inner join  schoolinfo b on a.sci_id  = b.sci_id where a.sci_id = ? and a.aci_role = ?";
             list = jdbc.query(sql, new Object[]{scid,role}, new BeanPropertyRowMapper(accountinfo.class));
         } catch (Exception e) {
+//            e.printStackTrace();
         }
         return list;
     }

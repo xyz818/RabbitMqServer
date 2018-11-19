@@ -50,9 +50,11 @@ public class deviceInfoImp implements deviceInfoDao {
     public int addDevice(deviceinfo d) {
         int row = 0;
         try {
-            String sql = "insert into deviceinfo(di_id,di_mac,di_name,di_type,di_conttype,di_key) values(?,?,?,?,?,?)";
-            row = jdbc.update(sql, new Object[]{d.getDi_id(), d.getDi_mac(), d.getDi_name(), d.getDi_type(), d.getDi_conttype(),
-                     d.getDi_key()});
+            if(selCountByDeivceId(d.getDi_id()) <= 0) {
+                String sql = "insert into deviceinfo(di_id,di_mac,di_name,di_type,di_conttype,di_key) values(?,?,?,?,?,?)";
+                row = jdbc.update(sql, new Object[]{d.getDi_id(), d.getDi_mac(), d.getDi_name(), d.getDi_type(), d.getDi_conttype(),
+                        d.getDi_key()});
+            }
         } catch (Exception e) {
 //            e.printStackTrace();
         }
@@ -87,6 +89,19 @@ public class deviceInfoImp implements deviceInfoDao {
         } catch (Exception e) {
 //            e.printStackTrace();
         }
+        return row;
+    }
+
+    @Override
+    public int selCountByDeivceId(String did) {
+        int row = 0;
+        try
+        {
+            String sql = "select COUNT(*) from deviceinfo where di_id = ?";
+            row = jdbc.queryForObject(sql,Integer.class,new Object[]{did});
+        }
+        catch (Exception e)
+        {}
         return row;
     }
 }

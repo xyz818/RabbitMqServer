@@ -62,8 +62,8 @@ public class triggerInfoServImp implements triggerInfoServ {
     }
 
     @Override
-    public String findTriggerBySid(String sid) {
-        triggerinfo t = tid.findTriggerBySid(sid);
+    public String findTriggerBySid(String sid,String lid) {
+        triggerinfo t = tid.findTriggerBySid(sid,lid);
         return JSONObject.fromObject(t).toString();
     }
 }

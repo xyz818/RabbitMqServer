@@ -38,7 +38,7 @@ public interface controllerInfoDao {
      * @author　xuyongzhe
      * @brief 根据触发器传感器id号查询控制类传感器id号
      **/
-    controllerinfo findControllerByTrigId(String sid);
+    List<controllerinfo> findControllerByTrigId(String sid);
 
 
 }

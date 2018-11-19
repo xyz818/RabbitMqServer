@@ -71,7 +71,8 @@ public class logicInfoImp implements logicInfoDao {
     public int deleteLogic(String id) {
         int row = 0;
         try {
-            String sql = "delete from logicinfo where li_id = ?";
+            String sql = "delete a,b,c from logicinfo a left join  triggerinfo b on a.li_id = b.li_id left join  " +
+                    "controllerinfo c on a.li_id = c.li_id where a.li_id = ?";
             row = jdbc.update(sql, new Object[]{id});
         } catch (Exception e) {
         }
@@ -84,7 +85,7 @@ public class logicInfoImp implements logicInfoDao {
 
         try {
             String sql = "delete a,b,c from logicinfo a left join  triggerinfo b on a.li_id = b.li_id left join " +
-                    "controllerinfo c on a.li_id = b.li_id where a.pi_seq = ?";
+                    "controllerinfo c on a.li_id = c.li_id where a.pi_seq = ?";
             row = jdbc.update(sql, new Object[]{pid});
         } catch (Exception e) {
 //            e.printStackTrace();

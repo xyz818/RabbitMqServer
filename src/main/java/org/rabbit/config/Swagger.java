@@ -32,9 +32,9 @@ public class Swagger {
 
         private ApiInfo apiInfo() {
             return new ApiInfoBuilder()
-                    .title("无锡泛太科技物联网云平台API文档")
-                    .description("详细RestFul接口:http://www.ftiotcloud.cn/RabbitMq/swagger-ui.html")
-                    .termsOfServiceUrl("//www.ftiotcloud.cn/RabbitMq/swagger-ui.html")
+                    .title("物联网云平台API文档")
+                    .description("详细RestFul接口:http://服务器ip:端口号/RabbitMqServer/swagger-ui.html")
+                    .termsOfServiceUrl("//服务器ip:端口号/RabbitMqServer/swagger-ui.html")
                     .version("1.0")
                     .build();
         }

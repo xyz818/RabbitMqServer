@@ -1,25 +1,10 @@
 package org.rabbit;
 
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.rabbit.mqtt.MqttMessage;
 import org.springframework.amqp.core.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.integration.annotation.ServiceActivator;
-import org.springframework.integration.channel.DirectChannel;
-import org.springframework.integration.core.MessageProducer;
-import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
-import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
-import org.springframework.integration.mqtt.inbound.MqttPahoMessageDrivenChannelAdapter;
-import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
-import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.MessageHandler;
-import org.springframework.messaging.MessagingException;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
@@ -28,8 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class RabbitMqApp extends SpringBootServletInitializer {
     final static String queueName = "hello";
 
-    @Autowired
-    MqttMessage mqttMessage;
+
     @Bean
     public Queue helloQueue() {
         return new Queue("hello");
@@ -149,69 +133,7 @@ public class RabbitMqApp extends SpringBootServletInitializer {
 //        SpringApplication.run(RabbitMqApp.class, args);
 //    }
 
-    @Bean
-    public MqttPahoClientFactory mqttClientFactory() {
-        DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
-        MqttConnectOptions options = new MqttConnectOptions();
-        options.setServerURIs(new String[] { "tcp://127.0.0.1:1883" });
-//        options.setUserName("username");
-//        options.setPassword("password".toCharArray());
-        options.setAutomaticReconnect(true); //自动重新链接
-        options.setCleanSession(true);   //不保留session
-        options.setKeepAliveInterval(30); //心跳周期
-        factory.setConnectionOptions(options);
-        return factory;
-    }
 
-    @Bean
-    @ServiceActivator(inputChannel = "mqttOutboundChannel")
-    public MessageHandler mqttOutbound() {
-        MqttPahoMessageHandler messageHandler =
-                new MqttPahoMessageHandler("RbMqOutTestqq", mqttClientFactory());
-        messageHandler.setAsync(true);
-        messageHandler.setDefaultQos(1);
-//        messageHandler.setDefaultTopic("testTopic");
-        return messageHandler;
-    }
-
-    @Bean
-    public MessageChannel mqttOutboundChannel() {
-        return new DirectChannel();
-    }
-
-
-
-
-
-
-    @Bean
-    public MessageChannel mqttInputChannel() {
-        return new DirectChannel();
-    }
-
-    @Bean
-    public MessageProducer inbound() {
-        MqttPahoMessageDrivenChannelAdapter adapter =
-                new MqttPahoMessageDrivenChannelAdapter("RbMqInTestqq",mqttClientFactory());
-
-        adapter.setCompletionTimeout(5000);
-        adapter.setConverter(new DefaultPahoMessageConverter());
-        adapter.addTopics(new String[]{"/upstream/#"},new int[]{1});  //订阅主题
-        adapter.setOutputChannel(mqttInputChannel());
-        return adapter;
-    }
-
-    @Bean
-    @ServiceActivator(inputChannel = "mqttInputChannel")
-    public MessageHandler handler() {
-        return new MessageHandler() {
-            @Override
-            public void handleMessage(Message<?> message) throws MessagingException {
-//               接受mqtt消息
-                mqttMessage.recieveMsg(message.getHeaders().get("mqtt_receivedTopic"), message.getPayload());
-            }
-        };
-    }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

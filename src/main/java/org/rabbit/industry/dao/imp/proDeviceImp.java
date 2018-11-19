@@ -15,11 +15,10 @@ public class proDeviceImp implements proDeviceDao {
     @Override
     public projectdevice selProIdByDeviceId(String deviceId) {
         projectdevice projectdevice = null;
-        try{
+        try {
             String sql = "select * from projectdevice where di_id = ?";
-            projectdevice = (org.rabbit.industry.model.projectdevice) jdbc.queryForObject(sql,new Object[]{deviceId},new BeanPropertyRowMapper(projectdevice.class));
-        }catch (Exception e)
-        {
+            projectdevice = (org.rabbit.industry.model.projectdevice) jdbc.queryForObject(sql, new Object[]{deviceId}, new BeanPropertyRowMapper(projectdevice.class));
+        } catch (Exception e) {
 
         }
         return projectdevice;
@@ -28,14 +27,22 @@ public class proDeviceImp implements proDeviceDao {
     @Override
     public int addProDev(String did, int pid) {
         int row = 0;
-        try
-        {
+        try {
             String sql = "insert into projectdevice(pi_seq,di_id) value (?,?)";
-            row =  jdbc.update(sql,new Object[]{pid,did});
-        }
-        catch (Exception e)
-        {
+            row = jdbc.update(sql, new Object[]{pid, did});
+        } catch (Exception e) {
 
+        }
+        return row;
+    }
+
+    @Override
+    public int delteByDevId(String did) {
+        int row = 0;
+        try {
+            String sql = "delete from projectdevice where di_id = ?";
+            row = jdbc.update(sql, new Object[]{did});
+        } catch (Exception e) {
         }
         return row;
     }

@@ -66,7 +66,7 @@ public class deviceInfoServImp implements deviceInfoServ {
 
     @Override
     public boolean deleteDevice(String did) {
-       if(dvi.deleteDevice(did) > 0)
+       if(dvi.deleteDevice(did) > 0 && pdd.delteByDevId(did)>0)
            return true;
        return false;
     }

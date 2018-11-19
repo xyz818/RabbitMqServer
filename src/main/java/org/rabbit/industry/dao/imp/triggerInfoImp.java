@@ -22,7 +22,7 @@ public class triggerInfoImp implements triggerInfoDao {
 
         try{
             //8-30 触发源问题,去重复
-            if(selectTriggerCountBySeid(t.getSei_id()) <=0) {
+            if(selectTriggerCountBySeid(t.getSei_id(),t.getLi_id()) <=0) {
                 String sql = "insert into triggerinfo(li_id,tri_valuetype,tri_limit,tri_value,sei_id) values(?,?,?,?,?)";
                 row = jdbc.update(sql, new Object[]{t.getLi_id(), t.getTri_valuetype(), t.getTri_limit(), t.getTri_value(), t.getSei_id()});
             }
@@ -83,24 +83,25 @@ public class triggerInfoImp implements triggerInfoDao {
     }
 
     @Override
-    public triggerinfo findTriggerBySid(String sid) {
+    public triggerinfo findTriggerBySid(String sid,String lid) {
         try {
-            String sql = "select * from triggerinfo where sei_id = ?";
-            return (triggerinfo) jdbc.queryForObject(sql, new Object[]{sid}, new BeanPropertyRowMapper(triggerinfo.class));
+            String sql = "select * from triggerinfo where sei_id = ? and li_id = ?";
+            return (triggerinfo) jdbc.queryForObject(sql, new Object[]{sid,lid}, new BeanPropertyRowMapper(triggerinfo.class));
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return null;
     }
 
     @Override
-    public int selectTriggerCountBySeid(String sid) {
+    public int selectTriggerCountBySeid(String sid,String lid) {
         int row = 0;
         try
         {
-            String sql = "select count(*) from triggerinfo where sei_id = ?";
-            row = jdbc.queryForObject(sql,Integer.class,new Object[]{sid});
+            String sql = "select count(*) from triggerinfo where sei_id = ? and li_id = ?";
+            row = jdbc.queryForObject(sql,Integer.class,new Object[]{sid,lid});
         }
         catch (Exception e){}
         return row;

@@ -60,8 +60,10 @@ public class senInfoImp implements sensorInfoDao {
     public int addSensor(sensorinfo s) {
         int row = 0;
         try {
-            String sql = "insert into sensorinfo(sei_id,sti_id,tti_id,sei_mac) values (?,?,?,?)";
-            row = jdbc.update(sql, new Object[]{s.getSei_id(), s.getSti_id(), s.getTti_id(), s.getSei_mac()});
+            if(selectCountBySid(s.getSei_id()) <= 0) {
+                String sql = "insert into sensorinfo(sei_id,sti_id,tti_id,sei_mac) values (?,?,?,?)";
+                row = jdbc.update(sql, new Object[]{s.getSei_id(), s.getSti_id(), s.getTti_id(), s.getSei_mac()});
+            }
         } catch (Exception e) {
         }
         return row;
@@ -71,10 +73,10 @@ public class senInfoImp implements sensorInfoDao {
     public int updateSensor(sensorinfo s) {
         int row = 0;
         try {
-            String sql = "update sensorinfo set sti_id = ?,tti_id = ?,sei_value=?,sei_mac=? where sei_id = ?";
-            row = jdbc.update(sql, new Object[]{s.getSei_id(), s.getSti_id(), s.getTti_id(), s.getSei_value(), s.getSei_mac()});
-        } catch (Exception e) {
-
+            String sql = "update sensorinfo set sti_id = ?,tti_id = ?,sei_mac=? where sei_id = ?";
+            row = jdbc.update(sql, new Object[]{s.getSti_id(), s.getTti_id(), s.getSei_mac(),s.getSei_id()});
+        } catch (Exception e){
+            e.printStackTrace();
         }
         return row;
     }
@@ -122,6 +124,23 @@ public class senInfoImp implements sensorInfoDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return row;
+    }
+
+    @Override
+    public int selectCountBySid(String sid) {
+        int row = 0;
+
+        try
+        {
+            String sql = "select  COUNT(*) from sensorinfo where sei_id = ?";
+            row = jdbc.queryForObject(sql,Integer.class,new Object[]{sid});
+        }
+        catch (Exception e)
+        {
+
+        }
+
         return row;
     }
 

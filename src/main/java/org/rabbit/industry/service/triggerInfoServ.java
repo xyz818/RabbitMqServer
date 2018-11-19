@@ -18,6 +18,6 @@ public interface triggerInfoServ {
      **/
     boolean updateTrigger(String json);
 
-    String findTriggerBySid(String sid);
+    String findTriggerBySid(String sid,String lid);
 
 }

@@ -47,7 +47,7 @@ public interface sensorInfoDao {
 
     /**
      * @brief 删除传感器
-     * @param s  传感器类
+     * @param id  传感器类
      * @return 数据库影响的行数
      *
      * */
@@ -68,5 +68,8 @@ public interface sensorInfoDao {
      * @brief 实时更新传感器数据
      **/
     int updateSensorValue(String value,String sid);
+
+
+    int selectCountBySid(String sid);
 
 }

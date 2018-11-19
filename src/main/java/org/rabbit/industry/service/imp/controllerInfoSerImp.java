@@ -71,8 +71,13 @@ public class controllerInfoSerImp implements controllerInfoServ {
      **/
     @Override
     public String findControllerByTrigId(String id) {
-        controllerinfo c = cid.findControllerByTrigId(id);
-        return JSONObject.fromObject(c).toString();
+        List<controllerinfo> c = cid.findControllerByTrigId(id);
+        JSONArray j = new JSONArray();
+        for(controllerinfo co : c)
+        {
+            j.add(JSONObject.fromObject(co));
+        }
+        return j.toString();
 
     }
 }

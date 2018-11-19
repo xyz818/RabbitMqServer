@@ -85,19 +85,20 @@ public class controllerInfoImp implements controllerInfoDao {
      * @brief 根据触发器传感器id号查询控制类传感器id号
      **/
     @Override
-    public controllerinfo findControllerByTrigId(String sid) {
+    public List<controllerinfo> findControllerByTrigId(String sid) {
+        List<controllerinfo> list = new ArrayList<>();
         try
         {
             String sql = "select b.coi_value,b.sei_id,b.li_id,c.li_status from triggerinfo a " +
                     "inner join controllerinfo b on a.li_id = b.li_id " +
                     "inner join logicinfo c on c.li_id=b.li_id where " +
                     "a.sei_id = ?";
-            return (controllerinfo) jdbc.queryForObject(sql,new Object[]{sid},new BeanPropertyRowMapper(controllerinfo.class));
+            list = jdbc.query(sql,new Object[]{sid},new BeanPropertyRowMapper(controllerinfo.class));
         }
         catch (Exception e)
         {
             //e.printStackTrace();
         }
-        return null;
+        return list;
     }
 }

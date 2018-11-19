@@ -96,7 +96,7 @@ public class sensorInfoContoller {
             @ApiImplicitParam(name = "json", value = "传感器数据包", required = true, dataType = "String")
     })
     @ResponseBody
-    public boolean updateSensor(String json) {
+    public boolean updateSensor(@RequestBody String json) {
         return sis.updateSensor(json);
     }
 
